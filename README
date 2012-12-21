@@ -1,0 +1,43 @@
+-----------------------------------------------------------------------------
+			      Astro Rush 
+-----------------------------------------------------------------------------
+Gra zrecznosciowa typu freerunner. Aplikacja wykorzystuje jako silnik wieloplatformowa biblioteke SDL,
+stad tez wsparcie na platformie linux oraz windows. Uruchamia sie w trybie fullscreen. Jezeli rodzielczosc jest mniejsza 
+niz okreslona minimalna w pliku const.hpp wtedy nastepuje skalowanie przy kazdej klatce.
+-----------------------------------------------------------------------------
+Autor:
+Kamil Lolo
+
+-----------------------------------------------------------------------------
+Wymagania sprzetowe:
+brak danych
+
+
+-------------------------------------------------------------- ---------------
+Dla uzytkownikow systemu Linux
+Aplikacja jest tworzona w srodowisku kdevelop, i po rozpakowaniu kodu mozna 
+zaimportowac projekt do tego IDE (Moga sie pojawic problemy z konfiguracja projektu, 
+nie polecemy robic tego malo doswiadczonym uzytkownikom ).
+
+Gre mozna skompilowac w trybie debugu, odkomentowywujac w pliku include/Headers.hpp 
+linie z: #define DEBUG. W tym trybie wypisywane sa na konsoli dodatkowe informacje ktora moga pomoc
+w naprawie uruchomieniu programu.
+
+
+Wymagane pakiety:
+  cmake, libsdl-image1.2-dev,libsdl-mixer1.2-dev
+  libsdl-sound1.2, libsdl-ttf2.0-0, libsdl1.2-dev 
+  liblua5.1, libluabind
+
+Kompilacja gry spod konsoli:
+  W katalogu z rozpakowana gra wydac polecenie: cmake ./CMakeLists.txt
+  W przypadku kiedy w systemie brakuje wymaganaych pakietow pojawi sie blad 
+  o braku jakiejs paczki. Patrz: Wymagane pakiety.
+
+Ostrzezenia:
+-W trybie DEBUG mozna tez wlaczyc pokazywanie ilsoci FPS-ow na pasku, 
+jest to nie stabilne, nie uzywac!
+-(Maszyny z kilkoma monitorami) Komputery uzywajace kart nvidi i sterownikow producenta 
+starszych niz wersja 302 nie beda prawidlowo uruchamiac aplikacji w trybie pelnoekranowym. 
+System zwraca tam niepoprawna rozdzielczosc ekranu.
+-------------------------------------------------------------------------------
