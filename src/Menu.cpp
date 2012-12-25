@@ -179,7 +179,6 @@ void Menu::pressedReturn() {
 
 }
 
-
 /** */
 void Menu::pressedEsc() {
 

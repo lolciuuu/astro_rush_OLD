@@ -25,7 +25,6 @@ public:
     void pressedLeft();
     void pressedDown();
     void pressedUp();
-    
     void blockItem( short ID) { pMainMenuItem[ID].setActive(false); }
 
     void resetMenu();

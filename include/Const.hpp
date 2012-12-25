@@ -8,7 +8,7 @@
 #define RENDER_GL
 #define LIGHT_GL
 
-#define IMMORTAL
+//#define IMMORTAL
 
 #define VERSION " build 0.1 "
 

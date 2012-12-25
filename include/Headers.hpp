@@ -74,6 +74,19 @@ struct ColisionSide {
 	left( false ), pos_Y_px( -1 ) { /*...*/ }
 };
 
+
+struct HighscoreItem {
+  string name;
+  uint points;
+
+  HighscoreItem( string n, string p = "" ) :
+  			  name( n ), points( 0 )
+  			  {}
+  HighscoreItem(): name( "" ),points( 0 )
+  			  {}
+};
+
+
 }
 using namespace Gamespace;
 

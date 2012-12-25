@@ -33,10 +33,10 @@ void LiveBar::draw() {
 void LiveBar::update(const float& dt ) {
   float nextLiveAmount = pLiveAmount - (dt*0.2);
 
-  if( nextLiveAmount > 0 )
+  if( nextLiveAmount >= 0 )
   pLiveAmount = nextLiveAmount;
   
-    if( nextLiveAmount < 0 )
+    if( nextLiveAmount <= 0 )
     isLive = false;
 
 }

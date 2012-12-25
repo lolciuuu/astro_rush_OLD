@@ -18,15 +18,16 @@ public:
     void draw();
     
     bool isCanStop() const { return( pIsCanStop ); } // czy mozna wyjsc z gry do menu
-    void jump();
-    
+
     void SpaceUp();
     void SpaceDown();
+
+    void pressedBackspace();
   
     void pressedShift();
-    
-private:
-    void drawGameOverScreen();
+    void pressedChar(char Char);
+
+    void goToMenu();
 
 private:
     Player pPlayer;

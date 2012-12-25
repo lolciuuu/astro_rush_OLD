@@ -300,14 +300,16 @@ void App::processEvent() {
             pGame->pressedDown();
         }
         else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_LSHIFT ) {
-                   pGame->pressedShift();
+            pGame->pressedShift();
         }
-        else if ( pEvent.type == SDL_KEYDOWN &&  ( pEvent.key.keysym.sym >= 97 && pEvent.key.keysym.sym >= 122 ) )
+        else if ( pEvent.type == SDL_KEYDOWN &&  ( pEvent.key.keysym.sym >= 97 && (int)pEvent.key.keysym.sym <= 122 ) )
         {
-            ///@TODO obsluga klawiatury do wpisania highscore
-
+            pGame->pressedChar( (char) pEvent.key.keysym.sym );
         }
-        ///@TODO Reszta zdarzen do dopisania
+        else if(  pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_BACKSPACE ) {
+        	pGame->pressedBackspace();
+        }
+
     }
 }
 

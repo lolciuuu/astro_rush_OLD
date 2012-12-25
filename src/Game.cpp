@@ -52,9 +52,8 @@ void Game::pressedShift() {
     		break;
     	}
     	default: {
-          logger.warring("Unknown value of GameState [ Method: Game::pressedShift() ]");
           break;
-      }
+       }
     };
 }
 
@@ -90,6 +89,7 @@ void Game::pressedReturn() {
     }
 }
 
+
 /** */
 void Game::pressedEsc() {
 
@@ -102,14 +102,21 @@ void Game::pressedEsc() {
     case( Gamespace::PLAY ): {
     	if( pPlay.isCanStop() ) // Wyjsc do menu mozna wtedy gdy play pozwala na to
 			pGameState = Gamespace::MENU;
+    		pPlay.goToMenu();
 			break;
     	}
     };
 }
 
+void Game::pressedBackspace() {
+	if( pGameState == Gamespace::PLAY )
+		pPlay.pressedBackspace();
+}
+
 /**  */
 void Game::pressedChar(char Char) {
-
+	if( pGameState == Gamespace::PLAY )
+		pPlay.pressedChar( Char );
 
 }
 

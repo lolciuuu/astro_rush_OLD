@@ -26,12 +26,13 @@ public:
   void pressedUp();
   void pressedEsc();
   void pressedReturn();
+  void pressedBackspace();
   
   void pressedShift();
 
   void SpaceUp();
   void SpaceDown();
-  
+
   void pressedChar(char);
 	
 private:

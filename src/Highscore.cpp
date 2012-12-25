@@ -1,35 +1,65 @@
 #include "../include/Highscore.hpp"
 #include "App.hpp"
+#include <cstdlib>
+
+vector<HighscoreItem> Highscore::pList;
 
 /** */
 Highscore::Highscore()
 {
   logger.setClassName( "Highscore" );
-  logger.info("Load highscore file");
+  load();
+}
 
+void Highscore::pressedBackspace() {
+	if( pCurrentName.size() > 0 )
+		pCurrentName = pCurrentName.substr( 0 , pCurrentName.size() - 1 );
+}
+
+void Highscore::pressedChar(char Char) {
+	if( pCurrentName.size() < 20 )
+		pCurrentName += Char;
 }
 
 /** */
 void Highscore::draw() {
-    Rect where( 550,200,300,300 );
     SDL_Color color( {240,240,250} );
 
+    Rect where( 150,200,300,300 );
     pWriterPtr->draw(where,"GAME OVER", color);
 
     where.y += 40;
-
     pWriterPtr->draw(where, "Result: " + LiveBar::getResult() + "m", color );
+
+    where.y += 30;
+    pWriterPtr->draw(where, "Name: ", color );
+
+    if( pCurrentName.size() > 0 ) {
+    	 where.x += 80;
+    	 pWriterPtr->draw(where,pCurrentName, color );
+    }
+
+    if( pList.size() > 0 ) {
+    	where.x  =150;
+    	for( uint i=0; i<pList.size(); ++i ) {
+    		where.y += 30;
+    		pWriterPtr->draw(where, pList[i].name , color );
+    	}
+    }
 }
 
 /** */
 void Highscore::show(){
+	   SDL_Color color( {240,240,250} );
     Property::get("HIGH_GAME_DIST");
     pWriterPtr->setFont("bold_big");
     Rect where({40,40,200,200});
     pWriterPtr->draw(where ,"HIGHSCORE" );
     
-    pWriterPtr->setFont("bold_small");
-  
+	for( uint i=0; i<pList.size(); ++i ) {
+		where.y += 30;
+	    pWriterPtr->draw(where, pList[i].name , color );
+	}
 }
 
 /** */
@@ -43,25 +73,52 @@ void Highscore::colision( short type ) {
 
 /** */
 void Highscore::load() {
-gInfo("Load highscore");
-	fstream file;
-	file.open("h", std::ios::in );
+	  logger.info("Load highscore file");
 
-	if( file.is_open() ) {
-		string name = "";
-		string points = "";
+	  fstream highFile;
+	  highFile.open( "data/astro.data", std::ios::in );
 
-		file>>name;
-		file>>points;
-		pList.push_back( HighscoreItem( name, points ) );
-	}
-	else {
-		 logger.error("Highscore not found");
-	}
+	  if( highFile.is_open() ) {
+		  while( !highFile.eof() || pList.size() > 15 ) {
+			  HighscoreItem item;
+			  highFile>>item.name;
+			  highFile>>item.points;
+
+			  pList.push_back( item );
+		  }
+
+		  highFile.close();
+	  }
 }
 
 /** */
 void Highscore::save() {
-  
+
+	 if( pCurrentName.size() > 0 ) {
+		 HighscoreItem item;
+		 item.name = pCurrentName;
+		 item.points = atoi( LiveBar::getResult().c_str() );
+		 pList.push_back( item );
+	}
+
+	 fstream highFile;
+	 highFile.open( "data/astro.data", std::ios::out ) ;
+
+	 if( highFile.is_open() ) {
+
+
+		    for( uint i=0; i<pList.size(); ++i ) {
+		    		highFile<<pList[i].name<<" ";
+		    		highFile<<pList[i].points;
+
+		    		if( i != pList.size()-1 )
+		    			highFile<<"\n";
+		    }
+
+		 highFile<<highFile.eofbit;
+		 highFile.close();
+	 }
+	 else logger.critical("Cannot save highscore");
+
 }
 

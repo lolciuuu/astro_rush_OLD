@@ -18,6 +18,24 @@ pCount( SpriteManager::getInstance().getSprite("COUNTING") )
     pCount.centered();
 }
 
+/** zapisanie highscore */
+void Play::goToMenu() {
+	pHighScore.save();
+}
+
+/** Wpisywanie swojego imienia w przypadku kiedy bohater umarl */
+void Play::pressedChar(char Char) {
+
+	if( !  LiveBar::isALive() ) {
+		pHighScore.pressedChar( Char );
+	}
+
+}
+
+void Play::pressedBackspace() {
+	if( ! LiveBar::isALive() )
+		pHighScore.pressedBackspace();
+}
 
 /** Aktualizacja gry
  */
@@ -92,17 +110,9 @@ void Play::draw(){
       }
   }
   else {
-      drawGameOverScreen();
+		pHighScore.draw();
   }
   
-}
-
-/** Rysowanie informacji o przegranej grze */
-void Play::drawGameOverScreen() {
-
-	pHighScore.draw();
-    pWriterPtr->setFont("bold_big");
-
 }
 	
 /** */
@@ -125,18 +135,12 @@ void Play::resetGame(){
 
 }
 
-/** Podskakiwanie gracza */
-void Play::jump() {
-  //pPlayer.jump();
-}
-
-
-
 /**  */
 void Play::SpaceDown() {
- 
-  pPlayer.SpaceDown();
-
+ if( !LiveBar::isALive() )
+	 pHighScore.pressedChar( ' ' );
+ else
+	 pPlayer.SpaceDown();
 }
 
 /**  */

@@ -19,24 +19,18 @@ public:
   
   void draw();
 
+  void pressedBackspace();
+
+  void pressedChar(char Char);
+
 private:
   
 private:
   
-  struct HighscoreItem {
-    string name;
-    string distance;
-    string points;
+  string pCurrentName;
 
-    HighscoreItem( string n, string d, string p = "" ) :
-    			  name( n ), distance( d ), points( p )
-    			  {}
-  };
+  static vector<HighscoreItem> pList;
 
-  vector<HighscoreItem> pList;
-  
-
- 
 };
 
 #endif // HIGHSCORE_HPP

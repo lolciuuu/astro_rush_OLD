@@ -31,8 +31,12 @@ Map::Map(short **M, ushort EntitySize, uint R, uint C) :
 
 /** Sciaga ze stosu ostatni element na ktorym wykryto kolizje */
 short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
+
 	pPlayer_x = Player_x;
 	pPlayer_y = Player_y;
+
+	/** Pobieranie kolizcji z bonusem badz przeszkoda ( kolizje bez powtorzen )
+	 * odlozonej na stos podczas rysowania	 */
 	short result = -1;
 
 	if (pColisionStack.size() > 0) {
@@ -46,14 +50,13 @@ short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
 			itWasReturn[X][Y] = true;
 			result = pMap[X][Y];
 
-			//@TODO usunac ta liczbe magiczna (ID tilesa z tlenem)
-			if (pMap[X][Y] == 38 || pMap[X][Y] == 37) {
+			if ( isBonus( pMap[X][Y] ) ) {
 				drawID->at(X)[Y] = false;
 			}
 		}
 	}
 
-	{ //
+	{ /** wykrywanie kolizji z platforma */
 		short X = Player_x + 5;
 		short Y = Player_y;
 		short current_px = -1 * pOffset_X;
@@ -61,6 +64,7 @@ short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
 
 		int index_x = pos_X;
 
+		// szukanie kolumny w ktorej jest kolizja
 		while (!(current_px <= X && next_px > X)) {
 			++index_x;
 			current_px = next_px;
@@ -72,6 +76,7 @@ short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
 
 		int index_y = pAmountEntityVertical - 1;
 
+		// szukanie wiersza w ktorym jest kolizja od gory
 		while (!(current_py >= Y && next_py < Y)) {
 			--index_y;
 			current_py = next_py;
@@ -89,6 +94,7 @@ short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
 		index_y = pAmountEntityVertical - 1;
 		Y = Player_y + pPlayer_sy;
 
+		// szukanie wiersza w ktorym jest kolizja od dolu
 		while (!(current_py >= Y && next_py < Y)) {
 			--index_y;
 			current_py = next_py;
@@ -106,6 +112,7 @@ short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
 		index_y = pAmountEntityVertical - 1;
 		Y = Player_y;
 
+		// szukanie wiersza w ktorym kolizja jest od boku
 		while (!( current_py < Y + pPlayer_sy && current_py > Y && next_py < Y + pPlayer_sy && next_py > Y ) ) {
 			--index_y;
 			current_py = next_py;

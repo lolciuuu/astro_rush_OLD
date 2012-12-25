@@ -158,12 +158,3 @@ void Property::resetLang(string Languages){
 
 }
 
-
-
-
-
-
-
-
-
-
