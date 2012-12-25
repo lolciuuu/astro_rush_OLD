@@ -44,6 +44,20 @@ void Game::draw() {
     };
 }
 
+void Game::pressedShift() {
+
+    switch ( pGameState ) {
+    	case( Gamespace::PLAY ): {
+    		pPlay.pressedShift();
+    		break;
+    	}
+    	default: {
+          logger.warring("Unknown value of GameState [ Method: Game::pressedShift() ]");
+          break;
+      }
+    };
+}
+
 /** */
 void Game::update(const float& dt ) {
   

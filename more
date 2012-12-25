@@ -1,3 +1,0 @@
-
- ---- Linkowanie ---- 
-cc  src/main.o src/App.o src/Property.o src/Resource.o src/Game.o src/Writer.o src/Player.o src/Play.o src/Menu.o src/Renderer.o src/MenuItem.o src/Sprite.o src/Highscore.o src/SpriteManager.o src/MapManager.o src/Map.o src/LiveBar.o src/SoundManager.o src/Splash.o src/RendererGL.o src/Logger.o  -o AstroRush -lGL -lGLU -lSDL -lSDL_ttf -lSDL_image -lluabind -llua5.1 

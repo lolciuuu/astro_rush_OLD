@@ -61,7 +61,16 @@ enum PlayerState {
     Fly
 };
 
+struct ColisionSide {
+	bool up;
+	bool down;
+	bool right;
+	bool left;
 
+	ColisionSide():
+	up(false), down(false), right(false),
+	left( false ) { /*...*/ }
+};
 
 }
 using namespace Gamespace;

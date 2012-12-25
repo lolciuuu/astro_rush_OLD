@@ -2,7 +2,6 @@
 #define HIGHSCORE_HPP
 
 #include "Headers.hpp"
-#include "ColisionType.hpp"
 #include "StandardReferences.hpp"
 
 class Highscore: StandardReferences
@@ -12,7 +11,7 @@ public:
   
   void show();
   
-  void colision( ColisionType type );
+  void colision( short type );
   
   void load();
   

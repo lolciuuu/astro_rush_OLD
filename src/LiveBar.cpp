@@ -17,8 +17,8 @@ LiveBar::LiveBar() :pDistStr( Property::get("HIGH_GAME_DIST") )
 /** Rysowanie paska zycia...cala gorna czesc ekranu */
 void LiveBar::draw() {
 
-	pRendererPtr->draw( "LIVE_BAR_BACK", pScreenWidth*0.053, pScreenHeight*0.037, -1, -1 );
-	pRendererPtr->draw( "LIVE_BAR_FILL", pScreenWidth*0.053, pScreenHeight*0.037, 200*pLiveAmount, -1 );
+	pRendererPtr->draw( "LIVE_BAR_BACK", pScreenWidth*0.053, pScreenHeight*0.043, -1, -1 );
+	pRendererPtr->draw( "LIVE_BAR_FILL", pScreenWidth*0.053, pScreenHeight*0.044, 200*pLiveAmount, -1 );
 	pRendererPtr->draw( "LIVE_BAR",      pScreenWidth*0.01,  pScreenHeight*0.02, -1, -1 );
 
 	// Wypisywanie informacji i przebytej drodze
@@ -42,7 +42,7 @@ void LiveBar::update(const float& dt ) {
 }
 
 /** */
-void LiveBar::colision( ColisionType type ) {
+void LiveBar::colision( short type ) {
 
   if( pLiveAmount >= 0.03 )
     pLiveAmount -= 0.03;

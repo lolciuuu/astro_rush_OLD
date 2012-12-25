@@ -1,5 +1,10 @@
 #include "../include/Play.hpp"
 
+
+void Play::pressedShift() {
+	pPlayer.fall();
+}
+
 /**
  * 
  */
@@ -40,20 +45,23 @@ void Play::update(const float& dt ){
 
     if( LiveBar::isALive() ) {
       pMap.update( dt );
-      pPlayer.update( dt );  
       pLiveBar.update( dt );
    
-      ColisionType type = pMap.checkColision( pPlayer.getPosX(), pPlayer.getPosY(), 50, 50 );
-      if( type == ColisionType::EMPTY_COLISION ) { 
-      /* ... */
-      }
-      else if(  type == ColisionType::STANDARD_BONUS ) {
-    	  	  pHighScore.colision( type );
-      }
-      else if( type == ColisionType::STANDARD_COLISION  ) {
-    	  	  pLiveBar.colision( type );
-      }
-      
+      ColisionSide cSide;
+      //@TODO optymalizacja
+     short type = pMap.checkColision( pPlayer.getPosX(), pPlayer.getPosY(), cSide );
+
+     if( type != -1 ) {
+
+    	  if( isBonus( type ) ) {
+    	 	  pHighScore.colision( type );
+    	  }
+    	  else {
+    		  pLiveBar.colision( type );
+    	  }
+      }// type != -1
+
+      pPlayer.update( dt, cSide );
     
     }
   }

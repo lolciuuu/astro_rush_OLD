@@ -7,7 +7,7 @@
 #include "StandardReferences.hpp"
 #include "Logger.hpp"
 
-/** Klasa jes singletonem, konstruktor zawiera zabezpieczenie przed wielokrotnym utworzeniem obiektu */
+/** Klasa jest singletonem, konstruktor zawiera zabezpieczenie przed wielokrotnym utworzeniem obiektu */
 class Game : StandardReferences 
 {
 public:  
@@ -27,6 +27,8 @@ public:
   void pressedEsc();
   void pressedReturn();
   
+  void pressedShift();
+
   void SpaceUp();
   void SpaceDown();
   

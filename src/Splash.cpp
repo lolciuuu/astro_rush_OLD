@@ -60,7 +60,7 @@ void Splash::startSplash( ushort W, ushort H, SDL_Surface* Screen ) {
     	pRectSplash.h = splashHeight;
 
     	pRectLoad.x = pRectSplash.x + 59;
-    	pRectLoad.y = pRectSplash.y + 430;
+    	pRectLoad.y = pRectSplash.y + 430.5;
     	pRectLoad.w = 1;
     	pRectLoad.h = 5;
     }

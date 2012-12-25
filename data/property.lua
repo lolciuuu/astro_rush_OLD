@@ -33,3 +33,5 @@ cxx_addProperty("ABOUT_GAME_DESC","Version: 0.0.0 devel");
 
 cxx_addProperty("EXIT_GAME","Exit");
 cxx_addProperty("EXIT_GAME_DESC","Exit game");
+
+print( "[ Lua ] End of script:property.lua" );

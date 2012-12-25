@@ -23,6 +23,7 @@ public:
     void SpaceUp();
     void SpaceDown();
   
+    void pressedShift();
     
 private:
     void drawGameOverScreen();

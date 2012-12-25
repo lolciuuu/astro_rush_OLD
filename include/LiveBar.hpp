@@ -2,9 +2,9 @@
 #define LIVEBAR_HPP
 #include "Headers.hpp"
 #include "Renderer.hpp"
-#include "ColisionType.hpp"
 #include "Writer.hpp"
 #include "StandardReferences.hpp"
+#include "Const.hpp"
 
 class LiveBar: public StandardReferences {
 public:
@@ -16,9 +16,15 @@ public:
   
   void update(const float& dt );
   
-  static bool isALive() { return( isLive ); }
+  static bool isALive() {
+		#ifndef IMMORTAL
+	  	  	  return( isLive );
+		#else
+	  	  	  return true;
+		#endif
+  }
   
-  static void colision( ColisionType type );
+  static void colision( short type );
   static void increaseLive();
   
   static string getResult() { return( toString<ulong>(pDistNum) ); }

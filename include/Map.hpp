@@ -3,7 +3,6 @@
 
 #include "Headers.hpp"
 #include "StandardReferences.hpp"
-#include "ColisionType.hpp"
 #include "Logger.hpp"
 
 class Map : StandardReferences {
@@ -30,9 +29,12 @@ public:
   void setRows( uint R ) { rows = R; }
   void setColumns( uint C ) { columns = C; }  
   void setSpeed( float S) { pSpeed = S; }
-  
-      
-  short checkColision(short Player_x, short Player_y, short Player_sx , short Player_sy );
+
+  bool isAnyPlatformAbove( float X, float Y );
+  bool isAnyPlatformBelow( float X, float Y );
+  bool isAnyPlatformOnRight( float X, float Y );
+
+  short checkColision(short Player_x, short Player_y);
   
   void enableCheckColision() { pCheckColision = true; }
   
@@ -73,10 +75,12 @@ private:
   short pPlayer_sy;
  
   struct Point {
-    Point(): X(0), Y(0) {}
-    Point( short x, short y) : X(x), Y(y){}
+    Point(): X(0), Y(0), X_px(0), Y_px(0) {}
+    Point( short x, short y, float pX, float pY ) : X(x), Y(y), X_px(pX), Y_px(pY) {}
     short X;
     short Y;
+    float X_px; //polozenie na ekranie w px
+    float Y_px; //polozenie na ekranie w px
   };
   std::stack<Point> pColisionStack;
   

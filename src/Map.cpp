@@ -23,16 +23,18 @@ Map::Map(short **M, ushort EntitySize, uint R, uint C) :
         
     itWasReturn =  vector < vector<bool> >( C, vector<bool>( R,false) );
     drawID = new vector < vector<bool> >( pC, vector<bool>( pR,true) );
+
+    pPlayer_sx = Property::getSetting("PLAYER_W");
+    pPlayer_sy = Property::getSetting("PLAYER_H");
         
 }
 
 /** Sciaga ze stosu ostatni element na ktorym wykryto kolizje */
-short Map::checkColision(short Player_x, short Player_y, short Player_sx , short Player_sy)
+short Map::checkColision(short Player_x, short Player_y )
 {
     pPlayer_x = Player_x;
     pPlayer_y = Player_y;
-    pPlayer_sy = Player_sy;
-    pPlayer_sx = Player_sx;
+    short result = -1;
 
     if(pColisionStack.size() > 0) {
       Point point = pColisionStack.top();
@@ -43,23 +45,18 @@ short Map::checkColision(short Player_x, short Player_y, short Player_sx , short
 
       if( !itWasReturn[ X][ Y ] ) {
 	   itWasReturn[ X ][ Y ] = true;
-	    
-	    
-	  if( pMap[X][Y] > 20 ) {
-	    drawID->at(X)[Y] = false;
-	    LiveBar::increaseLive(); 
-	  }
-	  else if( pMap[X][Y] == -1 ) {}
-	  else {
-	   LiveBar::colision( ColisionType::STANDARD_COLISION ); 
-	  }
-	   
-           return( pMap[ X ][ Y ] );
+	   result = pMap[X][Y];
+
+	   	   //@TODO usunac ta liczbe magiczna (ID tilesa z tlenem)
+	   	   if( pMap[X][Y] == 38 || pMap[X][Y] == 37 ) {
+		  	  drawID->at(X)[Y] = false;
+	  	   }
       }
    }
     
-    return( -1 );
+    return( result );
 }
+
 
 /** */
 void Map::draw()
@@ -82,12 +79,14 @@ void Map::draw()
             float des_y = ( App::getScreenHeight() - (y * pSize)) ;
 
             Rect src(MapManager::getRectByID(ID));
-            src.h = 50;
-            src.w = 50;
+
+            //@TODO usunac liczbe magiczna
+            src.h = pSize;
+            src.w = pSize;
 			pRendererPtr->draw(src, des_x, des_y, pSize, pSize );
 
              /// wykrywania kolizji
-            if(pCheckColision) {
+            if( pCheckColision ) {
 
                 if( !(pPlayer_x > (des_x + pSize) || pPlayer_x + pPlayer_sx < des_x || pPlayer_y + pPlayer_sy < des_y || pPlayer_y > des_y + pSize ) )
                 {
@@ -95,7 +94,7 @@ void Map::draw()
                     short yTmp = rows - y;
 
                     // Zapisanie na stosie ID elementu z ktorym wykryto kolizje
-                     pColisionStack.push( Point(xTmp, yTmp) );
+                     pColisionStack.push( Point(xTmp, yTmp,des_x, des_y) );
                 }
             } // END wykrywania kolizji
 
@@ -114,6 +113,68 @@ void Map::update(const float& dt) {
 	  ++pNextMeter;
   }
 
+}
+
+bool Map::isAnyPlatformAbove( float X, float Y ) {
+
+	short current_px = -1 * pOffset_X;
+	short next_px = current_px + pSize;
+
+	int index_x = pos_X;
+
+	while( !( current_px <= X &&  next_px > X ) ) {
+		++index_x;
+		current_px = next_px;
+		next_px += pSize;
+	}
+
+	short current_py = App::getScreenHeight();
+	short next_py = current_py - pSize;
+
+	int index_y = pAmountEntityVertical-1;
+
+	while( !( current_py >= Y && next_py < Y ) ) {
+		--index_y;
+		current_py = next_py;
+		next_py -= pSize;
+	}
+
+	if( isPlatform( pMap[index_x][index_y] ) || isPlatform( pMap[index_x+1][index_y] ) )
+		return true;
+
+	return false;
+}
+
+bool Map::isAnyPlatformBelow( float X, float Y ) {
+
+	Y += pPlayer_sy;
+
+	short current_px = -1 * pOffset_X;
+	short next_px = current_px + pSize;
+
+	int index_x = pos_X;
+
+	while( !( current_px <= X &&  next_px > X ) ) {
+		++index_x;
+		current_px = next_px;
+		next_px += pSize;
+	}
+
+	short current_py = App::getScreenHeight();
+	short next_py = current_py - pSize;
+
+	int index_y = pAmountEntityVertical-1;
+
+	while( !( current_py >= Y && next_py < Y ) ) {
+		--index_y;
+		current_py = next_py;
+		next_py -= pSize;
+	}
+
+	if( isPlatform( pMap[index_x][index_y] ) || isPlatform( pMap[index_x+1][index_y] ) )
+		return true;
+
+	return false;
 }
 
 /** Ustawienie bierzacej kolumny i wiersza na poczatek macierzy mapy */

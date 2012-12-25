@@ -47,8 +47,6 @@ int SpriteManager::addSprite( lua_State* L ) {
         short frame_count( lua_tointeger(L,8) );
         bool loop( lua_toboolean(L,9) );
 
-        gInfo("Add sprite:" + key );
-
         SpriteConfig spriteConf( 100,100,width,height,atlas_pos_x,atlas_pos_y,frame_time,frame_count,level,loop);
         SpriteManager::getInstance().pSprites.insert( std::pair<string,Sprite>( key, Sprite( spriteConf ) ));
 

@@ -33,7 +33,7 @@ void Highscore::show(){
 }
 
 /** */
-void Highscore::colision( ColisionType type ) {
+void Highscore::colision( short type ) {
   #ifdef DEBUG  
     gInfo("Highscore colision");
   #endif

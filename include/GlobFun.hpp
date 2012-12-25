@@ -37,6 +37,17 @@ inline void gInfo( const string& t ) {
 	LOGI +='\n';
 }
 
+/** */
+inline bool isPlatform( short ID ) {
+	if( ID == 39 ) return true;
+	return false;
+}
+
+/** */
+inline bool isBonus( short ID ) {
+	if( ID == 38 || ID ==  37 ) return true;
+	return false;
+}
 
 /** Metoda wyswietla w konsoli informacje.
  * Podana jako parametr informacja to ostrzezenie.

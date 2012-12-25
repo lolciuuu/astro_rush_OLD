@@ -107,24 +107,12 @@ void MapManager::reset() {
 }
 
 /** */ 
-ColisionType MapManager::checkColision(short Player_x, short Player_y,short Player_sx , short Player_sy ) {
- 
-   short ID = pMapMain->checkColision( Player_x, Player_y, Player_sx , Player_sy );
+short MapManager::checkColision(short Player_x, short Player_y, ColisionSide& cSide ) {
 
-   ColisionType result;
-   
-   // Identyfikacja po ID kafla mapy z jaka kolizja mamy doczynienia
-   if( ID == -1 ) 
-     result = ColisionType::EMPTY_COLISION;
-   else if( ID > 0 && ID < 19 ) {
-     result = ColisionType::STANDARD_COLISION;
-   }
-   else if( ID >= 19 ) {
-     result = ColisionType::STANDARD_BONUS;
-   }
+	cSide.up = pMapMain->isAnyPlatformAbove( Player_x, Player_y-2 );
+	cSide.down = pMapMain->isAnyPlatformBelow( Player_x, Player_y );
 
- return( result );
- 
+   return( pMapMain->checkColision( Player_x, Player_y ) );
 }
 
 

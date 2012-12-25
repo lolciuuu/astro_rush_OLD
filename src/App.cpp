@@ -299,6 +299,9 @@ void App::processEvent() {
         else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_DOWN ) {
             pGame->pressedDown();
         }
+        else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_LSHIFT ) {
+                   pGame->pressedShift();
+        }
         else if ( pEvent.type == SDL_KEYDOWN &&  ( pEvent.key.keysym.sym >= 97 && pEvent.key.keysym.sym >= 122 ) )
         {
             ///@TODO obsluga klawiatury do wpisania highscore

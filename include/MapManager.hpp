@@ -3,7 +3,6 @@
 
 #include "Headers.hpp"
 #include "Map.hpp"
-#include "ColisionType.hpp"
 #include "StandardReferences.hpp"
 
 /** Zarzadza wszystkimi poziomami mapy */
@@ -29,16 +28,16 @@ public:
 	}
 	else {
 	    gCritical("Not found map ID: " + toString<ushort>(ID) );
-	  #ifndef DEBUG
-	    throw("MapManager::getRectByID");
-	   #else // przypadek kiedy uztkownik wpisze glupoty
-	    gCritical( "MapManager::getRectByID" );
-	    return( Rect({0,0,0,0}) );
-	  #endif
-	}
+		#ifndef DEBUG
+	    	throw("MapManager::getRectByID");
+		#else // przypadek kiedy uztkownik wpisze glupoty
+	    	gCritical( "MapManager::getRectByID" );
+	    	return( Rect({0,0,0,0}) );
+		#endif
+		}
     }
-    
-    ColisionType checkColision(short Player_x, short Player_y, short Player_sx , short Player_sy );
+
+    short checkColision(short Player_x, short Player_y,ColisionSide& cSide);
     
 private:
    static Map* loadMapFromFile(string fileName,short levelNo);

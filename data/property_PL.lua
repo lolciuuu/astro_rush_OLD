@@ -58,3 +58,5 @@ cxx_addProperty("LANG_GAME","Language");
 
 cxx_addProperty("EXIT_GAME","Exit");
 cxx_addProperty("EXIT_GAME_DESC","Exit game");
+
+print( "[ Lua ] End of script:property.lua" );

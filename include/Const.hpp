@@ -3,10 +3,12 @@
 
 // Zmienne wlaczajaca tryb debugu
 
-#define FULL_SCREEN_FLAG
+// #define FULL_SCREEN_FLAG
 
 #define RENDER_GL
 #define LIGHT_GL
+
+#define IMMORTAL
 
 #define VERSION " build 0.1 "
 
@@ -16,8 +18,8 @@
 #endif
   
 
-const unsigned short WIDHT( 1500 );
-const unsigned short HEIGHT( 800 );
+const unsigned short WIDHT( 1000 );
+const unsigned short HEIGHT( 700 );
 const float SPLASH_TIME( 1 );
 
 // Ustawienia wymiarow levelu musza byc zgodnie z AstroDesignerem
@@ -28,7 +30,7 @@ const unsigned int LEVEL_HEIGHT( 25 );
 const ushort MAX_SCREEN_HEIGHT( 1080 );
 const ushort MAX_SCREEN_WIDTH( 1920 );
 
-const ushort MIN_SCREEN_HEIGHT( 800 );
+const ushort MIN_SCREEN_HEIGHT( 700 );
 const ushort MIN_SCREEN_WIDTH(  1000 );
 
 
