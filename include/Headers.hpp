@@ -67,9 +67,11 @@ struct ColisionSide {
 	bool right;
 	bool left;
 
+	float pos_Y_px;
+
 	ColisionSide():
 	up(false), down(false), right(false),
-	left( false ) { /*...*/ }
+	left( false ), pos_Y_px( -1 ) { /*...*/ }
 };
 
 }

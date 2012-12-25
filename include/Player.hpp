@@ -27,6 +27,9 @@ public:
     float getSize_Y() const { return PLAYER_H; }
 
 private:
+    void roundY( bool down );
+
+private:
   Sprite pRunSprite;
   Sprite pStandSprite;
   Sprite pFlySprite;

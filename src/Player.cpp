@@ -45,7 +45,8 @@ void Player::run(){
 
 /** Bohater przestaje leciec w gore i zaczyna opadac */
 void Player::fall() {
-	pVY = -1*PLAYER_Y_ACCELERATION;
+	if( pCurrentSprite != &pRunSprite )
+		pVY = -1*PLAYER_Y_ACCELERATION;
 }
 
 /** @REAL_TIME */
@@ -53,7 +54,20 @@ void Player::draw(){
   pCurrentSprite->draw( pX, pY, PLAYER_W, PLAYER_H );
 }
 
+//@TODO wywalic metode
+void Player::roundY( bool down ) {
+		float current_y = PLAYER_MAX_Y_POS;
+		float next_y = current_y + (short)Property::getSetting("TILES_SIZE");
 
+		while( !( pY >= current_y && next_y > pY ) ) {
+			current_y = next_y;
+			next_y += (short)Property::getSetting("TILES_SIZE");
+		}
+
+		if( down )
+			pY = next_y;
+		else pY = current_y;
+}
 
 /** @REAL_TIME */
 void Player::update(const float& dt, ColisionSide& side ){
@@ -80,25 +94,22 @@ void Player::update(const float& dt, ColisionSide& side ){
 
   if( side.up == true &&  nextY < pY ) {
 	 fall();
+	 pY = side.pos_Y_px;
 	 return;
   }
 
   if( side.down == true &&  nextY > pY ) {
 	  pCurrentSprite = &pRunSprite;
+	  pY = side.pos_Y_px;
  	  return;
   }
 
-  if( side.down != true && pY != MAX_Y_PLAYER )
+  if( side.down != true && pY != MAX_Y_PLAYER &&  nextY > pY )
 	  pCurrentSprite = &pFlySprite;
 
 
-
-
     if( nextY > PLAYER_MAX_Y_POS && nextY < MAX_Y_PLAYER ) {
-  /*  	if( side.up == true && nextY < pY )
-    		;
-    	else*/
-    		pY = nextY;
+   		pY = nextY;
     }
     else if( nextY >= MAX_Y_PLAYER ) { // gracz laduje na ziemi
       pCurrentSprite = &pRunSprite;
@@ -118,7 +129,7 @@ void Player::reset(){
     
     pCurrentSprite = &pStandSprite;
     pX = Property::getSetting("PLAYER_OFFSET_X");
-    pY =  pScreenHeight - Property::getSetting("PLAYER_OFFSET_Y");
+    pY = MAX_Y_PLAYER;
     
 }
 

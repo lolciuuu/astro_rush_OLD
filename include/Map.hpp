@@ -34,7 +34,7 @@ public:
   bool isAnyPlatformBelow( float X, float Y );
   bool isAnyPlatformOnRight( float X, float Y );
 
-  short checkColision(short Player_x, short Player_y);
+  short checkColision(short Player_x, short Player_y,ColisionSide& cSide );
   
   void enableCheckColision() { pCheckColision = true; }
   

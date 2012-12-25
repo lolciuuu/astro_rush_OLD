@@ -109,10 +109,10 @@ void MapManager::reset() {
 /** */ 
 short MapManager::checkColision(short Player_x, short Player_y, ColisionSide& cSide ) {
 
-	cSide.up = pMapMain->isAnyPlatformAbove( Player_x, Player_y-2 );
-	cSide.down = pMapMain->isAnyPlatformBelow( Player_x, Player_y );
+	//cSide.up = pMapMain->isAnyPlatformAbove( Player_x, Player_y-2 );
+	//cSide.down = pMapMain->isAnyPlatformBelow( Player_x, Player_y );
 
-   return( pMapMain->checkColision( Player_x, Player_y ) );
+   return( pMapMain->checkColision( Player_x, Player_y, cSide ) );
 }
 
 
