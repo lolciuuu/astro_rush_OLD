@@ -2,7 +2,7 @@
 #include "Sprite.hpp"
 #include "SpriteManager.hpp"
 #include "App.hpp"
-
+#include "EnemyManager.hpp"
 
 // Blok inicjowania zmiennych statycznych
 Map *MapManager::pMapMain;
@@ -10,9 +10,11 @@ vector<Rect> MapManager::pMap_rects;
 uint MapManager::LEVEL_VARIANTS;
 
 /** Tworzy tablice w ktorej znajduja sie wszystkie mozliwe wersje kafelkow mapy */
-MapManager::MapManager(): pIsRunMap( false )
-{
-    gInfo("Constructor class: MapManager");
+MapManager::MapManager(): pIsRunMap( false ) {
+
+	logger.setClassName("MapManager");
+	logger.info("Constructor class: MapManager");
+
     LEVEL_VARIANTS = (uint)Property::getSetting("LEVEL_VARIANTS");
 
     for(uint i = 0; i <= LEVEL_VARIANTS; ++i) {
@@ -28,8 +30,7 @@ MapManager::MapManager(): pIsRunMap( false )
 }
 
 /** */
-void MapManager::update(const float& dt)
-{
+void MapManager::update(const float& dt) {
   if( pIsRunMap == false ) return;
     pMapMain->update( dt );
     if( pMapMain->nextMeter() ) LiveBar::nextMeter();
@@ -37,15 +38,14 @@ void MapManager::update(const float& dt)
 
 
 /** */
-void MapManager::draw()
-{
+void MapManager::draw() {
     pMapMain->draw();
 }
 
 /** Metoda wczytuje mape do tablicy dwuwymiarowej,
  * levelNo - ID mapy w ustawieniach, potrzebny do okreslenia rozmiaru kafelka
  */
-Map* MapManager::loadMapFromFile(string fileName,short levelNo) {
+Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
   
     Map* result;
     std::fstream mapFile;
@@ -54,9 +54,11 @@ Map* MapManager::loadMapFromFile(string fileName,short levelNo) {
     uint row(0);
     uint column(0);
 
+   EnemyManager& enemyManager = EnemyManager::getInstance();
+
     if(mapFile.is_open()) {
 
-        gInfo("Loading main map");
+    	gInfo("Load map from file");
 
         // pobranie wymiarow mapy
         mapFile >> row;
@@ -73,8 +75,14 @@ Map* MapManager::loadMapFromFile(string fileName,short levelNo) {
             for(uint j = 0; j < column; ++j) {
                 short shortTmp;
                 mapFile >> shortTmp;
-		
-                map[j][i] = shortTmp;
+
+                // Wczytano potworka
+                if( isEnemy(shortTmp) ) {
+                	map[j][i] = -1;
+                	continue;
+                }
+                else
+                	map[j][i] = shortTmp;
             }
         }
 
@@ -92,8 +100,7 @@ Map* MapManager::loadMapFromFile(string fileName,short levelNo) {
 }
 
 /** Wczytanie wszystkich map. Metoda wolana podczas ladowania zasobow, poza glownym watkiem */
-void MapManager::load()
-{
+void MapManager::load() {
   pMapMain = loadMapFromFile( "data/level.lua", 1 );  
   pMapMain->setSpeed( Property::getSetting("MAP_LEVEL_1_SPEED") );
 }
@@ -101,17 +108,10 @@ void MapManager::load()
 /** */
 void MapManager::reset() {
   pMapMain->reset();
-  
-  
-
 }
 
 /** */ 
 short MapManager::checkColision(short Player_x, short Player_y, ColisionSide& cSide ) {
-
-	//cSide.up = pMapMain->isAnyPlatformAbove( Player_x, Player_y-2 );
-	//cSide.down = pMapMain->isAnyPlatformBelow( Player_x, Player_y );
-
    return( pMapMain->checkColision( Player_x, Player_y, cSide ) );
 }
 

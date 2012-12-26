@@ -2,7 +2,6 @@
 #define SPRITEMANAGER_HPP
 #include "Headers.hpp"
 #include "Sprite.hpp"
-#include <boost/shared_ptr.hpp>
 
 class SpriteManager
 {

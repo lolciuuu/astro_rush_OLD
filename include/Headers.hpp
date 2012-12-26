@@ -1,6 +1,10 @@
 #ifndef HEADERS_HPP
 #define HEADERS_HPP
 
+// Biblioteka boost
+#include <boost/shared_ptr.hpp>
+
+// standardowe hederki
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -12,6 +16,7 @@
 
 #include "Util.hpp"
 
+// przelacznik dla trybu debug
 #define DEBUG
 
 // LUA
@@ -27,7 +32,6 @@ extern "C" {
   #include <SDL/SDL_ttf.h>
   #include <SDL/SDL_image.h>
   #include <SDL/SDL_opengl.h>
-
 }
 
 

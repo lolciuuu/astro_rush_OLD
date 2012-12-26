@@ -3,7 +3,10 @@
 #include "Headers.hpp"
 
 class SoundManager {
-  
+public:
+
+private:
+
 };
 
 #endif

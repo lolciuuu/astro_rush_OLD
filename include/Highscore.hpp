@@ -31,6 +31,8 @@ private:
 
   static vector<HighscoreItem> pList;
 
+  ushort ITEM_AMOUNT;
+
 };
 
 #endif // HIGHSCORE_HPP

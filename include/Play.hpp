@@ -6,6 +6,7 @@
 #include "Highscore.hpp"
 #include "LiveBar.hpp"
 #include "SpriteManager.hpp"
+#include "EnemyManager.hpp"
 #include "StandardReferences.hpp"
 
 /** Obsluga taki jednostek jak: mapa, gracz, pasek zycia, highscore...stan gry*/
@@ -38,13 +39,13 @@ private:
     MapManager pMap;
     Highscore pHighScore;
     LiveBar pLiveBar;
+    EnemyManager pEnemyManager;
     
     float PLAYER_SLEEP_TIME;
     ushort PLAYER_SIZE;
     
     Sprite pCount;
     
-
 };
 
 #endif // PLAY_HPP

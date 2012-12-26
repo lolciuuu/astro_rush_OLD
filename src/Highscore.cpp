@@ -5,7 +5,7 @@
 vector<HighscoreItem> Highscore::pList;
 
 /** */
-Highscore::Highscore()
+Highscore::Highscore(): ITEM_AMOUNT(15)
 {
   logger.setClassName( "Highscore" );
   load();
@@ -73,13 +73,20 @@ void Highscore::colision( short type ) {
 
 /** */
 void Highscore::load() {
-	  logger.info("Load highscore file");
 
-	  fstream highFile;
-	  highFile.open( "data/astro.data", std::ios::in );
+	pList.clear();
+
+	logger.info("Load highscore file");
+
+	fstream highFile;
+	highFile.open( "data/astro.data", std::ios::in );
 
 	  if( highFile.is_open() ) {
-		  while( !highFile.eof() || pList.size() > 15 ) {
+
+		  while( !highFile.eof() ) {
+			  if( pList.size() > ITEM_AMOUNT )
+				  break;
+
 			  HighscoreItem item;
 			  highFile>>item.name;
 			  highFile>>item.points;
@@ -104,10 +111,15 @@ void Highscore::save() {
 	 fstream highFile;
 	 highFile.open( "data/astro.data", std::ios::out ) ;
 
+	 //@TODO posortowac liste
+
 	 if( highFile.is_open() ) {
 
 
 		    for( uint i=0; i<pList.size(); ++i ) {
+
+		    	if( i >= ITEM_AMOUNT ) break;
+
 		    		highFile<<pList[i].name<<" ";
 		    		highFile<<pList[i].points;
 

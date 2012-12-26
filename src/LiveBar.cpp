@@ -31,7 +31,7 @@ void LiveBar::draw() {
 
 /** */
 void LiveBar::update(const float& dt ) {
-  float nextLiveAmount = pLiveAmount - (dt*0.2);
+  float nextLiveAmount = pLiveAmount - (dt*0.1);
 
   if( nextLiveAmount >= 0 )
   pLiveAmount = nextLiveAmount;
@@ -44,8 +44,8 @@ void LiveBar::update(const float& dt ) {
 /** */
 void LiveBar::colision( short type ) {
 
-  if( pLiveAmount >= 0.03 )
-    pLiveAmount -= 0.03;
+  if( pLiveAmount >= 0.01 )
+    pLiveAmount -= 0.01;
   
   if( pLiveAmount < 0.0 ){
     isLive = false;

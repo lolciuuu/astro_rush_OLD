@@ -86,8 +86,6 @@ void Play::update(const float& dt ){
   
 }
 
-
-
 /** Rysowanie ekranu gry */
 void Play::draw(){
 
@@ -131,7 +129,6 @@ void Play::resetGame(){
   pCount.reset();
   
   LiveBar::resetMeter();
-  
 
 }
 

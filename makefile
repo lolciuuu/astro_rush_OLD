@@ -11,13 +11,14 @@ SOURCES = src/main.cpp src/App.cpp src/Property.cpp src/Resource.cpp \
 		  src/Menu.cpp src/Renderer.cpp src/MenuItem.cpp src/Sprite.cpp \
 		  src/Highscore.cpp src/SpriteManager.cpp src/MapManager.cpp \
 		  src/Map.cpp src/LiveBar.cpp src/SoundManager.cpp src/Splash.cpp \
-		  src/RendererGL.cpp src/Logger.cpp
+		  src/RendererGL.cpp src/Logger.cpp src/EnemyManager.cpp \
+		  src/Enemy.cpp
 
 # nazwy skompilowanych plikow cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 
 # nazwa pliku wynikowego
-EXECUTABLE = AstroRush
+EXECUTABLE = AstroRush.bin
 
 #
 all: $(SOURCES) $(EXECUTABLE)
@@ -36,7 +37,7 @@ $(EXECUTABLE): $(OBJECTS)
 # czyszczenei 
 clean:
 	rm -rf ./src/*.o
-	rm ./AstroRush
+	rm ./AstroRush.bin
 	@echo "Wyczyszczono"
 	
 	

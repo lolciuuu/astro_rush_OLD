@@ -49,6 +49,12 @@ inline bool isBonus( short ID ) {
 	return false;
 }
 
+/** */
+inline bool isEnemy( short ID ) {
+	if( ID == 40 ) return true;
+	return false;
+}
+
 /** Metoda wyswietla w konsoli informacje.
  * Podana jako parametr informacja to ostrzezenie.
  */
