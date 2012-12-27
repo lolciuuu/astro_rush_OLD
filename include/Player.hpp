@@ -32,6 +32,8 @@ public:
 
 	static bool isColisionWithEnemy() { return pColisionWithEnemy; }
 
+	static bool isFly() { return pIsFly; }
+
 private:
     void roundY( bool down );
 
@@ -59,7 +61,7 @@ private:
 	const float MAX_Y_PLAYER;
 	const float PLAYER_OFFSET_X;
   
-	bool pIsFly;
+	static bool pIsFly;
 
 	Logger logger;
 

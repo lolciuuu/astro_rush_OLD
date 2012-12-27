@@ -4,6 +4,7 @@
 #include "App.hpp"
 
 bool Player::pColisionWithEnemy( true );
+bool Player::pIsFly( false );
 
 /** */
 Player::Player():
@@ -22,7 +23,7 @@ Player::Player():
   PLAYER_Y_OFFSET( Property::getSetting("PLAYER_OFFSET_Y") ),
   MAX_Y_PLAYER( App::getScreenHeight() -PLAYER_Y_OFFSET ),
   PLAYER_OFFSET_X( Property::getSetting("PLAYER_OFFSET_X") ),
-  pIsFly( false ), logger("Player"), PLAYER_H( Property::getSetting("PLAYER_H") ),
+  logger("Player"), PLAYER_H( Property::getSetting("PLAYER_H") ),
   PLAYER_W( Property::getSetting("PLAYER_W") ),
   pMaxPlayerOnScreenX( pScreenWidth*0.5f ),timer( NULL ),
   DISABLE_COLLISION_WITH_ENEMY_TIME( 2500 )

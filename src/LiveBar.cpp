@@ -31,13 +31,15 @@ void LiveBar::draw() {
 
 /** */
 void LiveBar::update(const float& dt ) {
-  float nextLiveAmount = pLiveAmount - (dt*0.1);
+	float nextLiveAmount = 0.0f;
+//@TODO jakos dziwnie dziala- przetestowac
+  if( Player::isFly() )
+	  nextLiveAmount = pLiveAmount - (dt*0.1);
+  else
+	  nextLiveAmount = pLiveAmount - (dt*0.25);
 
   if( nextLiveAmount >= 0 )
   pLiveAmount = nextLiveAmount;
-  
-    if( nextLiveAmount <= 0 )
-    isLive = false;
 
 }
 
