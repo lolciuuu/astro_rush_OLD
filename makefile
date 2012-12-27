@@ -1,11 +1,11 @@
-# Flagi kompilatora
-CXX=g++
-CFLAGS= -Wall -ansi -pedantic -g -std=c++0x -c -Wall -I ./include 
+# compiler flag
+CXX = g++
+CFLAGS = -Wall -ansi -pedantic -g -std=c++0x -c -Wall -I ./include 
 
-#Flagi linkera
+# linker flags
 LIBS = -lGL -lGLU -lSDL -lSDL_ttf -lSDL_image -lluabind -llua5.1 
 
-# zrodla do skompilowania
+# list of cpp sources
 SOURCES = src/main.cpp src/App.cpp src/Property.cpp src/Resource.cpp \
 		  src/Game.cpp src/Writer.cpp src/Player.cpp src/Play.cpp \
 		  src/Menu.cpp src/Renderer.cpp src/MenuItem.cpp src/Sprite.cpp \
@@ -14,33 +14,28 @@ SOURCES = src/main.cpp src/App.cpp src/Property.cpp src/Resource.cpp \
 		  src/RendererGL.cpp src/Logger.cpp src/EnemyManager.cpp \
 		  src/Enemy.cpp
 
-# nazwy skompilowanych plikow cpp
+# extension compiled cpp file
 OBJECTS=$(SOURCES:.cpp=.o)
 
-# nazwa pliku wynikowego
+# name of output file
 EXECUTABLE = AstroRush.bin
 
-#
+# build all game
 all: $(SOURCES) $(EXECUTABLE)
 	 @echo "\n ---- Udało się ---- "
 
-# linkowanie aplikacji w plik wykonywalny	
+# linking application
 $(EXECUTABLE): $(OBJECTS) 
 	 @echo "\n ---- Linkowanie ---- "
 	$(CC)  $(OBJECTS)  -o $(EXECUTABLE) $(LIBS)
 
-# kompilowanie plikow cpp
+# compile cpp files
 .cpp.o:
 	 @echo "Kompilowanie pliku: $<"
 	 @$(CXX) $(CFLAGS) $< -o $@ 
 
-# czyszczenei 
+# remove temporary file and binary  
 clean:
 	rm -rf ./src/*.o
 	rm ./AstroRush.bin
 	@echo "Wyczyszczono"
-	
-	
-
-
-   

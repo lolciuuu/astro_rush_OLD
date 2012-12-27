@@ -43,14 +43,16 @@ void Highscore::draw() {
     	where.x  =150;
     	for( uint i=0; i<pList.size(); ++i ) {
     		where.y += 30;
-    		pWriterPtr->draw(where, pList[i].name , color );
+    		if( pList[i].name.size() > 0 )
+    			pWriterPtr->draw(where, pList[i].name , color );
     	}
     }
 }
 
 /** */
 void Highscore::show(){
-	   SDL_Color color( {240,240,250} );
+
+	SDL_Color color( {240,240,250} );
     Property::get("HIGH_GAME_DIST");
     pWriterPtr->setFont("bold_big");
     Rect where({40,40,200,200});
@@ -58,7 +60,8 @@ void Highscore::show(){
     
 	for( uint i=0; i<pList.size(); ++i ) {
 		where.y += 30;
-	    pWriterPtr->draw(where, pList[i].name , color );
+		if( pList[i].name.size() > 0 )
+			pWriterPtr->draw(where, pList[i].name , color );
 	}
 }
 
@@ -101,6 +104,8 @@ void Highscore::load() {
 /** */
 void Highscore::save() {
 
+	logger.info("Saving highscore");
+
 	 if( pCurrentName.size() > 0 ) {
 		 HighscoreItem item;
 		 item.name = pCurrentName;
@@ -115,7 +120,6 @@ void Highscore::save() {
 
 	 if( highFile.is_open() ) {
 
-
 		    for( uint i=0; i<pList.size(); ++i ) {
 
 		    	if( i >= ITEM_AMOUNT ) break;
@@ -127,10 +131,10 @@ void Highscore::save() {
 		    			highFile<<"\n";
 		    }
 
-		 highFile<<highFile.eofbit;
 		 highFile.close();
 	 }
 	 else logger.critical("Cannot save highscore");
 
+	 logger.info("Saved highscore to file");
 }
 

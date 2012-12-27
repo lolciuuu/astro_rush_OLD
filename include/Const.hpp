@@ -3,12 +3,12 @@
 
 // Zmienne wlaczajaca tryb debugu
 
-// #define FULL_SCREEN_FLAG
+//#define FULL_SCREEN_FLAG
 
 #define RENDER_GL
 #define LIGHT_GL
 
-//#define IMMORTAL
+#define IMMORTAL
 
 #define VERSION " build 0.1 "
 
@@ -33,6 +33,7 @@ const ushort MAX_SCREEN_WIDTH( 1920 );
 const ushort MIN_SCREEN_HEIGHT( 700 );
 const ushort MIN_SCREEN_WIDTH(  1000 );
 
+const ushort COLISION_WITH_ENEMY( 10000 );
 
 
 #endif

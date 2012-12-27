@@ -13,6 +13,8 @@
 class Play: StandardReferences {
 public:
     Play();
+    ~Play();
+
     void resetGame();
     
     void update (const float& dt );
@@ -39,11 +41,12 @@ private:
     MapManager pMap;
     Highscore pHighScore;
     LiveBar pLiveBar;
-    EnemyManager pEnemyManager;
-    
     float PLAYER_SLEEP_TIME;
-    ushort PLAYER_SIZE;
+     ushort PLAYER_SIZE;
+
+    EnemyManager* pEnemyManager;
     
+
     Sprite pCount;
     
 };

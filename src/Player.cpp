@@ -3,12 +3,13 @@
 #include "Property.hpp"
 #include "App.hpp"
 
+bool Player::pColisionWithEnemy( true );
 
 /** */
 Player::Player():
-  pRunSprite( SpriteManager::getInstance().getSprite("PLAYER_RUN") ),
-  pStandSprite( SpriteManager::getInstance().getSprite("PLAYER_STAND") ),
-  pFlySprite( SpriteManager::getInstance().getSprite("PLAYER_FLY") ),
+  pRunSprite( SpriteManager::getInstance()->getSprite("PLAYER_RUN") ),
+  pStandSprite( SpriteManager::getInstance()->getSprite("PLAYER_STAND") ),
+  pFlySprite( SpriteManager::getInstance()->getSprite("PLAYER_FLY") ),
   pState( PlayerState::Stand ),
   pCurrentSprite( &pStandSprite ),
   pX( Property::getSetting("PLAYER_OFFSET_X") ),
@@ -23,7 +24,8 @@ Player::Player():
   PLAYER_OFFSET_X( Property::getSetting("PLAYER_OFFSET_X") ),
   pIsFly( false ), logger("Player"), PLAYER_H( Property::getSetting("PLAYER_H") ),
   PLAYER_W( Property::getSetting("PLAYER_W") ),
-  pMaxPlayerOnScreenX( pScreenWidth*0.5f )
+  pMaxPlayerOnScreenX( pScreenWidth*0.5f ),timer( NULL ),
+  DISABLE_COLLISION_WITH_ENEMY_TIME( 2500 )
 {
 	logger.methodStart("Player()");
     pStandSprite.setX( 300 );
@@ -68,6 +70,19 @@ void Player::roundY( bool down ) {
 			pY = next_y;
 		else pY = current_y;
 }
+
+/** */
+void Player::disableEnemyDetect() {
+	pColisionWithEnemy = false;
+	timer = SDL_AddTimer( DISABLE_COLLISION_WITH_ENEMY_TIME, enableEnemyDetect_callbackTimer, this );
+}
+
+
+Uint32 Player::enableEnemyDetect_callbackTimer(Uint32 interval, void *param) {
+	pColisionWithEnemy = true;
+    return( interval );
+}
+
 
 /** @REAL_TIME */
 void Player::update(const float& dt, ColisionSide& side ){

@@ -22,7 +22,7 @@
 /** @note Zainicjowanie jedynej instancji obiektu. Pamiec jest automatycznie czyszczona
  *  dzieki uzyciu inteligentnego wskaznika z biblioteki boost	
  */
-boost::shared_ptr<SpriteManager> SpriteManager::pInstance( new SpriteManager() );
+SpriteManager* SpriteManager::pInstance(NULL);
 
 
 /** Metoda jest uruchamiana z poziomu skryptu LUA. Sprawdzana jest ilosc
@@ -48,7 +48,7 @@ int SpriteManager::addSprite( lua_State* L ) {
         bool loop( lua_toboolean(L,9) );
 
         SpriteConfig spriteConf( 100,100,width,height,atlas_pos_x,atlas_pos_y,frame_time,frame_count,level,loop);
-        SpriteManager::getInstance().pSprites.insert( std::pair<string,Sprite>( key, Sprite( spriteConf ) ));
+        SpriteManager::getInstance()->pSprites.insert( std::pair<string,Sprite>( key, Sprite( spriteConf ) ));
 
     }
     else {
@@ -88,9 +88,15 @@ void SpriteManager::loadConfig() {
  *  @return SpriteManager& : referencja do jedynej instancji tej klasy
  *  @param void
  */
-SpriteManager& SpriteManager::getInstance()
+SpriteManager* SpriteManager::getInstance()
 {
-    return *pInstance;
+	if( pInstance == NULL ) {
+		pInstance = new SpriteManager();
+		return pInstance;
+	}
+	else {
+		return pInstance;
+	}
 }
 
 
@@ -110,7 +116,8 @@ Sprite SpriteManager::getSprite( string Name ){
     return pSprites.find( Name )->second;
   }
   else{
-    gCritical("Not found sprite");
+	 cout<<pSprites.size();
+    gCritical("Not found sprite:" + Name);
     throw("SpriteManager::getSprite");
    }  
 }

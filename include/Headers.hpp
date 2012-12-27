@@ -65,6 +65,11 @@ enum PlayerState {
     Fly
 };
 
+enum EnemyState {
+	Left,
+	Right
+};
+
 struct ColisionSide {
 	bool up;
 	bool down;

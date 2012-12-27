@@ -20,49 +20,60 @@ public:
     short getPosX() const { return( pX ); }
     short getPosY() const { return( pY ); }
     
+    static Uint32 enableEnemyDetect_callbackTimer(Uint32 interval, void *param);
+
     void SpaceUp() {   pIsFly = false; }
     void SpaceDown(){   pIsFly = true; }
 
     float getSize_X() const { return PLAYER_W; }
     float getSize_Y() const { return PLAYER_H; }
 
+    void disableEnemyDetect();
+
+	static bool isColisionWithEnemy() { return pColisionWithEnemy; }
+
 private:
     void roundY( bool down );
 
 private:
-  Sprite pRunSprite;
-  Sprite pStandSprite;
-  Sprite pFlySprite;
-  PlayerState pState;
-  Sprite* pCurrentSprite;
+    Sprite pRunSprite;
+    Sprite pStandSprite;
+    Sprite pFlySprite;
+    PlayerState pState;
+    Sprite* pCurrentSprite;
   
-  short pX;
-  short pY;
+    short pX;
+    short pY;
 
-  bool pJumpAllowed;
+	bool pJumpAllowed;
 
-  float pSpeed;
-  float pVY;
-  float pAY;
+	float pSpeed;
+	float pVY;
+	float pAY;
   
-  // stale wczytane z zasobow
-  const float PLAYER_Y_ACCELERATION;
-  const float PLAYER_Y_VELOCITY;
-  float PLAYER_MAX_Y_POS;
-  const float PLAYER_Y_OFFSET;
-  const float MAX_Y_PLAYER;
-  const float PLAYER_OFFSET_X;
+	// stale wczytane z zasobow
+	const float PLAYER_Y_ACCELERATION;
+	const float PLAYER_Y_VELOCITY;
+	float PLAYER_MAX_Y_POS;
+	const float PLAYER_Y_OFFSET;
+	const float MAX_Y_PLAYER;
+	const float PLAYER_OFFSET_X;
   
-  bool pIsFly;
+	bool pIsFly;
 
-  Logger logger;
+	Logger logger;
 
-  const float PLAYER_H;
-  const float PLAYER_W;
+	const float PLAYER_H;
+	const float PLAYER_W;
 
-  float pMaxPlayerOnScreenX;
+	float pMaxPlayerOnScreenX;
 
-  float lastVY;
+	float lastVY;
+
+    SDL_TimerID timer;
+
+    static bool pColisionWithEnemy;
+    ushort const DISABLE_COLLISION_WITH_ENEMY_TIME;
 };
 
 #endif // PLAYER_HPP

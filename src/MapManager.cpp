@@ -2,7 +2,7 @@
 #include "Sprite.hpp"
 #include "SpriteManager.hpp"
 #include "App.hpp"
-#include "EnemyManager.hpp"
+
 
 // Blok inicjowania zmiennych statycznych
 Map *MapManager::pMapMain;
@@ -10,21 +10,25 @@ vector<Rect> MapManager::pMap_rects;
 uint MapManager::LEVEL_VARIANTS;
 
 /** Tworzy tablice w ktorej znajduja sie wszystkie mozliwe wersje kafelkow mapy */
-MapManager::MapManager(): pIsRunMap( false ) {
+MapManager::MapManager(): pIsRunMap( false ), pEnemyManager( EnemyManager::getInstance() ) {
 
 	logger.setClassName("MapManager");
 	logger.info("Constructor class: MapManager");
 
     LEVEL_VARIANTS = (uint)Property::getSetting("LEVEL_VARIANTS");
 
+    // dynamicznie stworzenie nazw spritow o konkretnych numerach
     for(uint i = 0; i <= LEVEL_VARIANTS; ++i) {
         std::ostringstream ss;
         ss << i;
         string ID(ss.str());
-        Sprite spriteTmp = SpriteManager::getInstance().getSprite("MAP_" + ID);
+        Sprite spriteTmp = SpriteManager::getInstance()->getSprite("MAP_" + ID);
         pMap_rects.push_back(spriteTmp.getRect());
     }
     
+    pEnemyManager->setHorizontalTilesAmount( pMapMain->getAmountEntityHorizontal() );
+    pEnemyManager->setTilesSize( pMapMain->getSize() );
+
     pMapMain->enableCheckColision();
   
 }
@@ -33,7 +37,11 @@ MapManager::MapManager(): pIsRunMap( false ) {
 void MapManager::update(const float& dt) {
   if( pIsRunMap == false ) return;
     pMapMain->update( dt );
+
     if( pMapMain->nextMeter() ) LiveBar::nextMeter();
+
+    pEnemyManager->setCurrentX( pMapMain->getPos_X() );
+    pEnemyManager->setOffsetX( pMapMain->getOffsetX() );
 }
 
 
@@ -54,11 +62,11 @@ Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
     uint row(0);
     uint column(0);
 
-   EnemyManager& enemyManager = EnemyManager::getInstance();
+   EnemyManager* enemyManager = EnemyManager::getInstance();
 
     if(mapFile.is_open()) {
 
-    	gInfo("Load map from file");
+    	gInfo("Load map from file | start");
 
         // pobranie wymiarow mapy
         mapFile >> row;
@@ -78,6 +86,7 @@ Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
 
                 // Wczytano potworka
                 if( isEnemy(shortTmp) ) {
+                	enemyManager->addEnemy( i, j, shortTmp );
                 	map[j][i] = -1;
                 	continue;
                 }
@@ -90,6 +99,7 @@ Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
         result = new Map( map,(int)Property::getSetting(settingsName),row,column);
 
         mapFile.close();
+    	gInfo("Load map from file | end");
         return( result );
 	
     }

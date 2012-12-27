@@ -10,17 +10,22 @@ void Play::pressedShift() {
  */
 Play::Play(): pIsCanStop( false ), pElapsedTime( 0.0f ),
 pMap(),PLAYER_SLEEP_TIME( Property::getSetting("PLAYER_SLEEP_TIME") ),
-PLAYER_SIZE( Property::getSetting("PLAYER_SIZE") ),
-pCount( SpriteManager::getInstance().getSprite("COUNTING") )
+PLAYER_SIZE( Property::getSetting("PLAYER_SIZE") ), pEnemyManager( EnemyManager::getInstance() ),
+pCount( SpriteManager::getInstance()->getSprite("COUNTING") )
 {
 	logger.setClassName( "PLay" );
     logger.info("Constructor class: PLAY");
     pCount.centered();
 }
 
+Play::~Play() {
+	delete pEnemyManager;
+}
+
 /** zapisanie highscore */
 void Play::goToMenu() {
-	pHighScore.save();
+	if( ! LiveBar::isALive() )
+		pHighScore.save();
 }
 
 /** Wpisywanie swojego imienia w przypadku kiedy bohater umarl */
@@ -64,9 +69,12 @@ void Play::update(const float& dt ){
     if( LiveBar::isALive() ) {
       pMap.update( dt );
       pLiveBar.update( dt );
+
+      pEnemyManager->update( dt );
    
       ColisionSide cSide;
       //@TODO optymalizacja
+      /** Parametr cSide przekazuje informacje do playera z ktorej strony wystepuje kolizja z platforma */
      short type = pMap.checkColision( pPlayer.getPosX(), pPlayer.getPosY(), cSide );
 
      if( type != -1 ) {
@@ -74,10 +82,18 @@ void Play::update(const float& dt ){
     	  if( isBonus( type ) ) {
     	 	  pHighScore.colision( type );
     	  }
-    	  else {
+    	  else if( !isPlatform( type ) ){
     		  pLiveBar.colision( type );
     	  }
       }// type != -1
+
+     if( pEnemyManager->isColidate( Rect( pPlayer.getPosX(), pPlayer.getPosY(), pPlayer.getSize_X(), pPlayer.getSize_Y() ) ) ) {
+
+    	 if( pPlayer.isColisionWithEnemy() ) {
+ 	     	 pLiveBar.colision( COLISION_WITH_ENEMY ); //@TODO zastapic stala
+    		 pPlayer.disableEnemyDetect();
+    	 }
+     }
 
       pPlayer.update( dt, cSide );
     
@@ -96,6 +112,9 @@ void Play::draw(){
       // MapManager rysuje mapy
       pMap.draw();
       
+      // rysowanie przeciwnikow na mapie
+      pEnemyManager->draw();
+
       // Klasa Player rysuje gracza
       pPlayer.draw();
       
@@ -116,17 +135,17 @@ void Play::draw(){
 /** */
 void Play::resetGame(){
   
-  gInfo("Play: Creating New Game");
+  logger.info("Play: Creating New Game");
   pElapsedTime = 0.0f;
   pIsCanStop = false;
   pPlayer.reset();
   
   pMap.stopMap();
-  pMap.reset(); 
   
+  pMap.reset();
   pLiveBar.reset();
-  
   pCount.reset();
+  pEnemyManager->reset();
   
   LiveBar::resetMeter();
 

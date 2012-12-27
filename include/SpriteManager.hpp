@@ -6,12 +6,10 @@
 class SpriteManager
 {
 public:
-  
   static void loadConfig();
-  static SpriteManager& getInstance();
+  static SpriteManager* getInstance();
     
   Sprite getSprite( string Name );
-
   
 private:
    SpriteManager(){ /* Empty */ }
@@ -20,7 +18,7 @@ private:
     
 private:
   map<string,Sprite> pSprites;
-  static boost::shared_ptr<SpriteManager> pInstance;
+  static SpriteManager* pInstance;
   
 };
 

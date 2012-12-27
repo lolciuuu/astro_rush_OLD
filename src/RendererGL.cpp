@@ -245,7 +245,7 @@ void RendererGL::draw( SDL_Surface* surf, Rect& Dest ) {
 /** */
 void RendererGL::draw( string Name , float x, float y, float w = -1, float h = -1 ) {
 
-	Sprite sprite = SpriteManager::getInstance().getSprite( Name );
+	Sprite sprite = SpriteManager::getInstance()->getSprite( Name );
 	Rect Src( sprite.getAtlasX(), sprite.getAtlasY(), sprite.getWidth(), sprite.getHeight() );
 
 	if( w != -1 ) Src.w = w;
@@ -285,7 +285,7 @@ void RendererGL::draw( string Name , float x, float y, float w = -1, float h = -
 /** */
 void RendererGL::draw( float x, float y, string Name ) {
 
-	Sprite sprite = SpriteManager::getInstance().getSprite( Name );
+	Sprite sprite = SpriteManager::getInstance()->getSprite( Name );
 	Rect Src( sprite.getAtlasX(), sprite.getAtlasY(), sprite.getWidth(), sprite.getHeight() );
 
 	 glBindTexture(GL_TEXTURE_2D, pAtlas_GL);
@@ -322,7 +322,7 @@ void RendererGL::draw( float x, float y, string Name ) {
 /** */
 void RendererGL::draw( Rect& Dest, string Name ) {
 
-	Sprite sprite = SpriteManager::getInstance().getSprite( Name );
+	Sprite sprite = SpriteManager::getInstance()->getSprite( Name );
 	Rect Src( sprite.getAtlasX(), sprite.getAtlasY(), sprite.getWidth(), sprite.getHeight() );
 
 	 glBindTexture(GL_TEXTURE_2D, pAtlas_GL);

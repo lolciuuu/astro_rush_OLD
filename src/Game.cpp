@@ -100,11 +100,12 @@ void Game::pressedEsc() {
         break;
     }
     case( Gamespace::PLAY ): {
-    	if( pPlay.isCanStop() ) // Wyjsc do menu mozna wtedy gdy play pozwala na to
-			pGameState = Gamespace::MENU;
+    	if( pPlay.isCanStop() ) { // Wyjsc do menu mozna wtedy gdy play pozwala na to
     		pPlay.goToMenu();
-			break;
+    		pGameState = Gamespace::MENU;
     	}
+		break;
+	 }
     };
 }
 

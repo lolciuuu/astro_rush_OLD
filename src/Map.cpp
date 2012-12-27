@@ -169,10 +169,10 @@ void Map::draw() {
 			/// wykrywania kolizji
 			if (pCheckColision) {
 
-				if (!(pPlayer_x > (des_x + pSize)
-						|| pPlayer_x + pPlayer_sx < des_x
-						|| pPlayer_y + pPlayer_sy < des_y
-						|| pPlayer_y > des_y + pSize)) {
+				if (!(pPlayer_x >= (des_x + pSize)
+						|| pPlayer_x + pPlayer_sx <= des_x
+						|| pPlayer_y + pPlayer_sy <= des_y
+						|| pPlayer_y >= des_y + pSize)) {
 					short xTmp = x + pos_X;
 					short yTmp = rows - y;
 

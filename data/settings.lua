@@ -45,7 +45,8 @@ cxx_addSetting("PLAYER_H", ( (SCREEN_H/TILES_VERTICAL)*2) );
 print( "[ Lua ] Loading map settings" );
 cxx_addSetting("MAP_LEVEL_1_SIZE", SCREEN_H/TILES_VERTICAL );
 cxx_addSetting("MAP_LEVEL_1_SPEED", 500 ); -- bylo 1200
-cxx_addSetting("LEVEL_VARIANTS", 39 );
+
+cxx_addSetting("LEVEL_VARIANTS", 40 ); -- zwiekszyc w przypadku dodania nowe sprita na mapie
 
 -- Ustawienia HighScore
 cxx_addSetting("HIGH_OFFSET_Y", 20 );

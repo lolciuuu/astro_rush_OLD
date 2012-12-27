@@ -18,7 +18,11 @@ public:
   
   static bool isALive() {
 		#ifndef IMMORTAL
-	  	  	  return( isLive );
+	  	  	  if( pLiveAmount <= 0.0 ) {
+	  	  		  isLive = false;
+	  	  		  gInfo("Player is dead");
+	  	  		  return( isLive );
+	  	  	  }
 		#else
 	  	  	  return true;
 		#endif

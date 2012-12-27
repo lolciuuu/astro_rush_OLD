@@ -43,17 +43,16 @@ void LiveBar::update(const float& dt ) {
 
 /** */
 void LiveBar::colision( short type ) {
+//@TODO usunac liczby magiczne
 
-  if( pLiveAmount >= 0.01 )
-    pLiveAmount -= 0.01;
-  
-  if( pLiveAmount < 0.0 ){
-    isLive = false;
-  
-  #ifdef DEBUG  
-    gInfo("LiveBar:: End game");
-  #endif
-  }
+	if( type == COLISION_WITH_ENEMY ) {
+		  if( pLiveAmount >= 0.01 )
+		    pLiveAmount -= 0.01;
+	}
+	else {
+		  if( pLiveAmount >= 0.03 )
+				    pLiveAmount -= 0.03;
+	}
   
 }
 

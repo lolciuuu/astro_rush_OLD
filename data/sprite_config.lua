@@ -70,6 +70,7 @@ cxx_addSprite( "MAP_36",  map_size_1,     map_size_1,    0,                 map_
 cxx_addSprite( "MAP_37",  map_size_1,     map_size_1,    5 * map_size_1,    map_meteo_y + map_size_1,  1, 1000, 1, false );
 cxx_addSprite( "MAP_38",  map_size_1,     map_size_1,    6 * map_size_1,    map_meteo_y + map_size_1,  1, 1000, 1, false );
 cxx_addSprite( "MAP_39",  map_size_1,     map_size_1,    20,                 540,                    1, 1000, 1, false );
+cxx_addSprite( "MAP_40",  map_size_1,     map_size_1,    1200,               560,                    1, 1000, 1, false );
 
 
 print( "[ Lua ] End of script:sprite_config.lua" );

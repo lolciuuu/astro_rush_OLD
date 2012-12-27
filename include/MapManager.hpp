@@ -3,6 +3,7 @@
 
 #include "Headers.hpp"
 #include "Map.hpp"
+#include "EnemyManager.hpp"
 #include "StandardReferences.hpp"
 
 /** Zarzadza wszystkimi poziomami mapy */
@@ -50,6 +51,8 @@ private:
     static uint LEVEL_VARIANTS;
   
     bool pIsRunMap;
+
+    EnemyManager* pEnemyManager;
 };
 
 #endif

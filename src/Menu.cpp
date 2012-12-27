@@ -19,7 +19,7 @@ Menu::Menu() : pIsDone ( false ),pMenuState ( Gamespace::MAIN ), pCurrentItem ( 
 
     
     /** Wpis w menu:  -- Return -- */
-    MenuItem resumeGameItem ( Sprite(SpriteManager::getInstance().getSprite("NEW_GAME") ),
+    MenuItem resumeGameItem ( Sprite(SpriteManager::getInstance()->getSprite("NEW_GAME") ),
     						  Property::get( "RESUME_GAME" ),whereSpriteRect );
     {
          resumeGameItem.setActive ( false );
@@ -31,7 +31,7 @@ Menu::Menu() : pIsDone ( false ),pMenuState ( Gamespace::MAIN ), pCurrentItem ( 
     }
 
     /** Wpis w menu:  -- New Game -- */
-    MenuItem playGameItem ( Sprite(SpriteManager::getInstance().getSprite("NEW_GAME") ) ,
+    MenuItem playGameItem ( Sprite(SpriteManager::getInstance()->getSprite("NEW_GAME") ) ,
 			  	  	  	  	Property::get ("NEW_GAME"), whereSpriteRect );
     {
     	string title = Property::get ( "NEW_GAME_DESC" );
@@ -44,7 +44,7 @@ Menu::Menu() : pIsDone ( false ),pMenuState ( Gamespace::MAIN ), pCurrentItem ( 
    
 
     /** Wpis w menu:  -- HighScore -- */
-    MenuItem highGameItem ( Sprite(SpriteManager::getInstance().getSprite("NEW_GAME") ),
+    MenuItem highGameItem ( Sprite(SpriteManager::getInstance()->getSprite("NEW_GAME") ),
     		 Property::get ( "HIGH_GAME" ),whereSpriteRect );
     {
     	string title =  Property::get ( "HIGH_GAME" );
@@ -55,7 +55,7 @@ Menu::Menu() : pIsDone ( false ),pMenuState ( Gamespace::MAIN ), pCurrentItem ( 
     }
   
     /** Wpis w menu:  -- About -- */
-    MenuItem AboutGameItem ( Sprite(SpriteManager::getInstance().getSprite("NEW_GAME") ),
+    MenuItem AboutGameItem ( Sprite(SpriteManager::getInstance()->getSprite("NEW_GAME") ),
     		 Property::get ( "ABOUT_GAME" ),whereSpriteRect );
     {
        string title =  Property::get ( "ABOUT_GAME_DESC" );
@@ -66,7 +66,7 @@ Menu::Menu() : pIsDone ( false ),pMenuState ( Gamespace::MAIN ), pCurrentItem ( 
     }
       
     /** Wpis w menu:  -- Exit -- */
-    MenuItem exitItem ( Sprite(SpriteManager::getInstance().getSprite("NEW_GAME") ),
+    MenuItem exitItem ( Sprite(SpriteManager::getInstance()->getSprite("NEW_GAME") ),
     		 Property::get ( "EXIT_GAME" ),whereSpriteRect );
     {
     	string title =  Property::get ( "EXIT_GAME_DESC" );
@@ -130,15 +130,12 @@ void Menu::draw() {
 /** */
 void Menu::drawMainMenu() {
 
-
-    //pRendererPtr->drawImg( string("MENU_TITLE"), pMenuTitleRect );
 	  pRendererPtr->drawBackground( true );
-    pWriterPtr->setFont ( "bold_big" );
+      pWriterPtr->setFont ( "bold_big" );
 
-    for ( register uint i = 0; i < pMainMenuItem.size(); ++i ) {
+      for ( register uint i = 0; i < pMainMenuItem.size(); ++i ) {
         pMainMenuItem[i].draw();
-
-    }
+     }
 
 }
 

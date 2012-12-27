@@ -34,6 +34,12 @@ public:
 			r(0.0f), g(0.0f), b(0.0f), a(0.0f)
 			{ /** EMPTY */ }
 
+	bool isColidate( Rect rct ) {
+		if (!(x >= (rct.x + rct.w )	|| x + w <= rct.x
+			|| y + h <= rct.y || y >= rct.y + rct.h ) )
+			return true;
+		return false;
+	}
 };
 
 #endif
