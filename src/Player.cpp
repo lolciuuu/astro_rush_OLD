@@ -25,7 +25,7 @@ Player::Player():
   PLAYER_OFFSET_X( Property::getSetting("PLAYER_OFFSET_X") ),
   logger("Player"), PLAYER_H( Property::getSetting("PLAYER_H") ),
   PLAYER_W( Property::getSetting("PLAYER_W") ),
-  pMaxPlayerOnScreenX( pScreenWidth*0.5f ),timer( NULL ),
+  pMaxPlayerOnScreenX( pScreenWidth*0.6f ),timer( NULL ),
   DISABLE_COLLISION_WITH_ENEMY_TIME( 2500 )
 {
 	logger.methodStart("Player()");
@@ -81,6 +81,7 @@ void Player::disableEnemyDetect() {
 
 Uint32 Player::enableEnemyDetect_callbackTimer(Uint32 interval, void *param) {
 	pColisionWithEnemy = true;
+	//@TODO wylaczyc timer
     return( interval );
 }
 
@@ -98,11 +99,15 @@ void Player::update(const float& dt, ColisionSide& side ){
 
 
   /** Polozenie w poziomie */
+  //@TODO powiazac ilosc zycia z szybkoscia
+  //@TODO usunac liczbe magiczna
   if( pCurrentSprite != ( &pStandSprite ) ) {
-     if( pX < ( LiveBar::getLiveAmount()*pMaxPlayerOnScreenX ) )
-    	 pX += dt * pSpeed*.5;
-     else if( pX > ( LiveBar::getLiveAmount()*pMaxPlayerOnScreenX ) && pX > PLAYER_OFFSET_X  )
-    	 pX -= dt * pSpeed*.5;
+     if( pX < ( LiveBar::getLiveAmount()*pMaxPlayerOnScreenX ) ) {
+    	 pX += dt * 100;
+     }
+     else if( pX > ( LiveBar::getLiveAmount()*pMaxPlayerOnScreenX ) && pX > PLAYER_OFFSET_X  ) {
+    	 pX -= dt *100;
+     }
 
   /** Polozenie w pionie */
   float nextY = pY + ( (pVY+pAY) * (dt) * 15);

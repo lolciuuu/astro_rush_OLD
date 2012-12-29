@@ -51,6 +51,8 @@ private:
     Renderer* pRenderer;
     SDL_Event pEvent;
 
+    SDL_Surface* pIcon;
+
 };
 
 #endif // APP_HPP

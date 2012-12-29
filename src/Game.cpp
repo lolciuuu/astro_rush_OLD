@@ -188,6 +188,12 @@ void Game::SpaceUp() {
 
 }
 
+void Game::pressedCtrl() {
+
+	  if( Gamespace::PLAY ) {
+		pPlay.useBonus();
+	  }
+}
 
 /** Resetowanie gry */
 void Game::reset(){

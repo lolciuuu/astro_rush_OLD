@@ -1,8 +1,8 @@
 #include "../include/MenuItem.hpp"
 
 MenuItem::MenuItem(Sprite sprite, string name, Rect Where) :
-		pItemName(name), pImage(sprite), pDesciption(""), pIsActive(true), pIsSelected(
-				false), pCurrentItem(0) {
+		pItemName(name), pImage(sprite), pDesciption(""), pIsActive(true),
+		pIsSelected( false ), pCurrentItem(0) {
 	/// @TODO przeniesc offset sprita do zasobow
 	pImage.setX(Where.x);
 	pImage.setY(Where.y);
@@ -18,6 +18,8 @@ MenuItem::MenuItem(Sprite sprite, string name, Rect Where) :
  */
 void MenuItem::draw() {
 
+	//@TODO optymalizacja
+
 		if (!pIsActive && !pIsSelected) { // Rysowanie wyszarzonego itema
 
 			SDL_Color color( { 120, 120, 120 });
@@ -31,7 +33,7 @@ void MenuItem::draw() {
 
 				if (pItems.size() > 0) {
 					Rect rect( { 300, 300, 100, 100 });
-					pWriterPtr->draw(rect, pItems[pCurrentItem]);
+					pWriterPtr->draw( rect, pItems[pCurrentItem] );
 				}
 
 				else { // pokazanie opisu zaraz pod obrazkiem
@@ -40,7 +42,7 @@ void MenuItem::draw() {
 					rect.y = pImage.getY() + (pImage.getRect()).h + 50;
 					rect.w = 300;
 					rect.h = 100;
-					pWriterPtr->draw(rect, pDesciption,0.03);
+					pWriterPtr->draw(rect, pDesciption, FONT_SMALLER );
 				}
 
 				pImage.draw();

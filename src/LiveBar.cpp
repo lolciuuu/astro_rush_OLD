@@ -4,9 +4,10 @@
 ulong LiveBar::pDistNum;
 float LiveBar::pLiveAmount(1);
 bool LiveBar::isLive(true);
+bool LiveBar::isImmortal( false );
 
 /** */
-LiveBar::LiveBar() :pDistStr( Property::get("HIGH_GAME_DIST") )
+LiveBar::LiveBar() :pDistStr( Property::get("HIGH_GAME_DIST") ), pBonusAmount( 0 ), timer()
 {
   pDistanceRect.y = Property::getSetting( "HIGH_OFFSET_Y" );
   pDistanceRect.x = (App::getScreenWidth() / 2) -100;
@@ -24,13 +25,22 @@ void LiveBar::draw() {
 	// Wypisywanie informacji i przebytej drodze
 	std::ostringstream ss;
     ss << pDistNum;
-    pWriterPtr->draw( pDistanceRect, pDistStr + string(ss.str()) + " m" , 0.03 );
+
+    //@TODO znalsc wszystkie okreslenia czcionki poprzez liczbe magiczna i zastaoic stala
+    pWriterPtr->draw( pDistanceRect, pDistStr + string(ss.str()) + " m" , FONT_SMALLER );
+
+    //@TODO optymalizacja
+    for( int i=0; i<pBonusAmount; ++i ) {
+    	SpriteManager::getInstance()->getSprite("MAP_40").draw( pScreenWidth - ( pScreenWidth*0.1 ) - (i*pScreenWidth*0.08), pScreenHeight*0.03 );
+    }
 
 }
 
 
 /** */
 void LiveBar::update(const float& dt ) {
+	if( isImmortal ) return;
+
 	float nextLiveAmount = 0.0f;
 //@TODO jakos dziwnie dziala- przetestowac
   if( Player::isFly() )
@@ -56,6 +66,26 @@ void LiveBar::colision( short type ) {
 				    pLiveAmount -= 0.03;
 	}
   
+}
+
+/** */
+bool LiveBar::useBonus() {
+	  if( pBonusAmount > 0 ){
+		  --pBonusAmount;
+		  isImmortal = true;
+		  timer = SDL_AddTimer( 4000, disableImmortal_callbackTimer, this );
+		  pLiveAmount = 1.0f;
+		  return true;
+	  }
+	  else {
+		  return false;
+	  }
+}
+
+/** */
+Uint32 LiveBar::disableImmortal_callbackTimer(Uint32 interval, void* param) {
+	isImmortal = false;
+	return( interval );
 }
 
 /** */

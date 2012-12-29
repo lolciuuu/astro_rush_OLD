@@ -24,7 +24,7 @@ Writer::~Writer() {
 
 /** */
 void Writer::draw( Rect WhereRect, string Text, SDL_Color Color ){
-
+//@TODO ujedolicic rozmiary czionek w calej aplikacji
   SDL_Surface* tmp_surf = TTF_RenderText_Blended( pFont, Text.c_str(), Color );
   WhereRect.w = pScreen->w * (0.01 * Text.length() );
   WhereRect.h = pScreen->h * pFontSize;

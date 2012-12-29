@@ -14,7 +14,7 @@ ushort App::pScreen_w;
 //END
 
 /** Zainicjowanie bibliotek, utworzenie okna */
-App::App(): logger("App"), pIsDone( false ), pEvent()
+App::App(): logger("App"), pIsDone( false ), pEvent(), pIcon( NULL )
 {
 	logger.methodStart( "App()" );
 
@@ -69,6 +69,10 @@ App::App(): logger("App"), pIsDone( false ), pEvent()
    	initVideoGL();
 
 	SDL_WM_SetCaption( "Astro Rush" VERSION, NULL );
+
+	pIcon = IMG_Load("data/pic/ico.png");
+
+	SDL_WM_SetIcon( pIcon , NULL );
 
 	logger.methodEnd( "App" );
 }
@@ -147,7 +151,9 @@ App::~App()
 {
     delete pGame;
 
+    SDL_FreeSurface( pIcon );
     SDL_FreeSurface( pScreen );
+
     TTF_Quit();
     SDL_Quit();
 }
@@ -209,6 +215,8 @@ void App::init() {
     Renderer::getInstance()->init();
 
 }
+
+
 void App::run() {
 
 	pRenderer = Renderer::getInstance();
@@ -301,6 +309,9 @@ void App::processEvent() {
         }
         else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_LSHIFT ) {
             pGame->pressedShift();
+        }
+        else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_RCTRL ) {
+                   pGame->pressedCtrl();
         }
         else if ( pEvent.type == SDL_KEYDOWN &&  ( pEvent.key.keysym.sym >= 97 && (int)pEvent.key.keysym.sym <= 122 ) )
         {

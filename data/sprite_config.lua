@@ -9,8 +9,8 @@ TIME_FACTOR = 2
 
 --		NAME            		 width   	height  	X     		 Y    	  level  	frame time      count     loop
 cxx_addSprite( "NEW_GAME",        215,  	 220,   	1220,  	  	10,     	1,         1000 ,    	  1,     false );
-cxx_addSprite( "PLAYER_RUN",      50,   	 98,    	1,     		120,    	1,         40 ,    	      10,    true  );
-cxx_addSprite( "PLAYER_STAND",    50,   	 98,     	551,   		120,    	1,         100 ,    	  1,     false );
+cxx_addSprite( "PLAYER_RUN",      50,   	 98,    	1,     		122,    	1,         40 ,    	      10,    true  );
+cxx_addSprite( "PLAYER_STAND",    50,   	 98,     	551,   		122,    	1,         100 ,    	  1,     false );
 cxx_addSprite( "PLAYER_FLY",      52,   	 100,   	599,    	122,    	1,         60 ,     	  1,     true  );
 cxx_addSprite( "COUNTING",        50,   	 58,    	0,      	0,      	1,         290,    	      4,     false );
 cxx_addSprite( "LIVE_BAR",        100,  	 62,   	    840,    	39,     	1,         620 ,    	  1,     false );
@@ -67,11 +67,14 @@ cxx_addSprite( "MAP_33",  map_size_1,     map_size_1,    3 * map_size_1,    map_
 cxx_addSprite( "MAP_34",  map_size_1,     map_size_1,    2 * map_size_1,    map_ground_y,     1, 1000, 1, false );
 cxx_addSprite( "MAP_35",  map_size_1,     map_size_1,    1 * map_size_1,    map_ground_y,     1, 1000, 1, false );
 cxx_addSprite( "MAP_36",  map_size_1,     map_size_1,    0,                 map_ground_y,     1, 1000, 1, false );
-cxx_addSprite( "MAP_37",  map_size_1,     map_size_1,    5 * map_size_1,    map_meteo_y + map_size_1,  1, 1000, 1, false );
-cxx_addSprite( "MAP_38",  map_size_1,     map_size_1,    6 * map_size_1,    map_meteo_y + map_size_1,  1, 1000, 1, false );
+
+-- babelki
+cxx_addSprite( "MAP_37",  map_size_1,     map_size_1,    5+(5 * map_size_1),    (map_meteo_y + map_size_1),  1, 1000, 1, false );
+cxx_addSprite( "MAP_38",  map_size_1,     map_size_1,    -2+(6 * map_size_1),     map_meteo_y + map_size_1,  1, 1000, 1, false );
+
 cxx_addSprite( "MAP_39",  map_size_1,     map_size_1,    20,                 540,                    1, 1000, 1, false );
 cxx_addSprite( "MAP_40",  map_size_1,     map_size_1,    1200,               560,                    1, 1000, 1, false );
-
+cxx_addSprite( "MAP_41",  map_size_1,     map_size_1,    809,               65,                    1, 1000, 1, false );
 
 print( "[ Lua ] End of script:sprite_config.lua" );
 

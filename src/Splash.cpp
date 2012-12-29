@@ -53,7 +53,7 @@ void Splash::startSplash( ushort W, ushort H, SDL_Surface* Screen ) {
     { 	//Ustawianie wymiarow i polozenia obrazka splasha
     	ushort splashHeight = pSplash->h;
     	ushort splashWidth = pSplash->w;
-	
+
     	pRectSplash.x = ( pScreen->w / 2u ) - ( splashWidth/2u );
     	pRectSplash.y = ( pScreen->h / 2u ) - ( splashHeight/2u );
     	pRectSplash.w = splashWidth;

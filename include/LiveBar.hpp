@@ -16,6 +16,16 @@ public:
   
   void update(const float& dt );
   
+  void addBonus(){
+	  if( pBonusAmount < 3 ) {
+	  	  ++pBonusAmount;
+	  }
+  }
+
+  static Uint32 disableImmortal_callbackTimer(Uint32 interval, void *param);
+
+  bool useBonus();
+
   static bool isALive() {
 		#ifndef IMMORTAL
 	  	  	  if( pLiveAmount <= 0.0 ) {
@@ -48,5 +58,10 @@ private:
   static ulong pDistNum;
   static float pMapSpeed;
   
+  ushort pBonusAmount;
+
+  static bool isImmortal;
+  SDL_TimerID timer;
+
 };
 #endif

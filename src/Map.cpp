@@ -50,7 +50,7 @@ short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
 			itWasReturn[X][Y] = true;
 			result = pMap[X][Y];
 
-			if ( isBonus( pMap[X][Y] ) ) {
+			if ( isBonus( result ) || isAdditionalBonus( result ) ) {
 				drawID->at(X)[Y] = false;
 			}
 		}

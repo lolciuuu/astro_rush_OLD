@@ -32,6 +32,8 @@ public:
 
     void goToMenu();
 
+    void useBonus();
+
 private:
     Player pPlayer;
     

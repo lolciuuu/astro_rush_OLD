@@ -25,7 +25,7 @@ TILES_VERTICAL=18;
 TILES_AMOUNT_VERTICAL=15; -- ile jest wierszy na mapie
 TILES_SIZE=SCREEN_H/TILES_VERTICAL;
 
-cxx_addSetting("PLAYER_OFFSET_X", 100 );
+cxx_addSetting("PLAYER_OFFSET_X", 80 );
 cxx_addSetting("PLAYER_OFFSET_Y", (SCREEN_H/TILES_VERTICAL)*3 );
 cxx_addSetting("PLAYER_SLEEP_TIME", 1  );
 cxx_addSetting("PLAYER_SPEED", 200 );
@@ -44,9 +44,9 @@ cxx_addSetting("PLAYER_H", ( (SCREEN_H/TILES_VERTICAL)*2) );
 --Ustawienia mapy
 print( "[ Lua ] Loading map settings" );
 cxx_addSetting("MAP_LEVEL_1_SIZE", SCREEN_H/TILES_VERTICAL );
-cxx_addSetting("MAP_LEVEL_1_SPEED", 500 ); -- bylo 1200
+cxx_addSetting("MAP_LEVEL_1_SPEED", 300 ); -- bylo 1200
 
-cxx_addSetting("LEVEL_VARIANTS", 40 ); -- zwiekszyc w przypadku dodania nowe sprita na mapie
+cxx_addSetting("LEVEL_VARIANTS", 41 ); -- zwiekszyc w przypadku dodania nowe sprita na mapie
 
 -- Ustawienia HighScore
 cxx_addSetting("HIGH_OFFSET_Y", 20 );

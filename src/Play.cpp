@@ -82,9 +82,13 @@ void Play::update(const float& dt ){
     	  if( isBonus( type ) ) {
     	 	  pHighScore.colision( type );
     	  }
+    	  else if( isAdditionalBonus( type ) ) {
+    		  pLiveBar.addBonus();
+    	  }
     	  else if( !isPlatform( type ) ){
     		  pLiveBar.colision( type );
     	  }
+
       }// type != -1
 
      if( pEnemyManager->isColidate( Rect( pPlayer.getPosX(), pPlayer.getPosY(), pPlayer.getSize_X(), pPlayer.getSize_Y() ) ) ) {
@@ -162,6 +166,10 @@ void Play::SpaceDown() {
 /**  */
 void Play::SpaceUp() {
  pPlayer.SpaceUp();     
-
 }
 
+void Play::useBonus() {
+	 if( LiveBar::isALive() ) {
+		 pLiveBar.useBonus();
+	 }
+}

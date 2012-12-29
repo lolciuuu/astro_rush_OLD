@@ -49,6 +49,8 @@ using std::vector;
 typedef vector<string>::iterator vStrIt;
 
 
+const float FONT_SMALLER( 0.035f );
+
 enum GameState {
     MENU,
     PLAY

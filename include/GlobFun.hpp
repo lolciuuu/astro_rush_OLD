@@ -44,13 +44,19 @@ inline bool isPlatform( short ID ) {
 }
 
 /** */
-inline bool isBonus( short ID ) {
+inline bool isBonus( const short& ID ) {
 	if( ID == 38 || ID ==  37 ) return true;
 	return false;
 }
 
 /** */
-inline bool isEnemy( short ID ) {
+inline bool isAdditionalBonus( const short& ID ) {
+	if( ID == 41 ) return true;
+	return false;
+}
+
+/** */
+inline bool isEnemy( const short& ID ) {
 	if( ID == 40 ) return true;
 	return false;
 }

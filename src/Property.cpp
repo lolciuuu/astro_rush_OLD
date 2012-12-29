@@ -114,6 +114,9 @@ void Property::readSettings() {
 	lua_pushnumber(L, App::getScreenHeight() );
 	lua_setglobal(L, "SCREEN_H");
 
+	lua_pushnumber(L, App::getScreenWidth() );
+	lua_setglobal(L, "SCREEN_W");
+
     // Rejestracja metod ktora beda wywolywane ze skryptu
     lua_register( L, "cxx_addProperty", Property::addComand );
     lua_register( L, "cxx_addSetting", Property::addSetting );

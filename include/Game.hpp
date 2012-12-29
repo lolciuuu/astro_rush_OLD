@@ -27,7 +27,8 @@ public:
   void pressedEsc();
   void pressedReturn();
   void pressedBackspace();
-  
+  void pressedCtrl();
+
   void pressedShift();
 
   void SpaceUp();

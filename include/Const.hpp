@@ -10,7 +10,7 @@
 
 #define IMMORTAL
 
-#define VERSION " build 0.1 "
+#define VERSION " build 0.2 "
 
 #ifdef DEBUG
   // Zmienna wlaczajaca pokazywanie ilosci fps-ow na pasku
