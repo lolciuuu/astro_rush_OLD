@@ -14,6 +14,10 @@ public:
 
 	virtual void draw( SDL_Surface* surf, Rect& where );
 
+	virtual void draw( GLuint, Rect& where );
+
+	virtual void draw( GLuint,const float& x, const float& y,const float& w,const float& h );
+
 	virtual void fillRect( Rect& rect );
 
 	virtual void draw( Rect& Src, float x, float y, float w, float h );
@@ -31,6 +35,8 @@ public:
 	void cleanScreen();
 
 	void init();
+
+	static GLuint getSurfaceInGLFormat( SDL_Surface * surface );
   
 protected:
     SDL_Surface* pScreen;
@@ -42,7 +48,7 @@ protected:
 
 private:
 	void create_gl(SDL_Surface * surface, GLuint * tex );
-	GLuint get_gl(SDL_Surface * surface );
+	static GLuint get_gl(SDL_Surface * surface );
 
 
 private:

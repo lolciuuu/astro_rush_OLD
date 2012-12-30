@@ -24,7 +24,7 @@ public:
 	float a;
 
 	/** Domyslny konstrukto zerujacy zmienne */
-	Rect(): x(0), y(0), w(0), h(0), color(0),
+	Rect(): x(0.0f), y(0.0f), w(0.0f), h(0.0f), color(0),
 			r(0.0f), g(0.0f), b(0.0f), a(0.0f)
 			{ /** EMPTY */ }
 

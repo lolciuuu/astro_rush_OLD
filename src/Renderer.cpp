@@ -8,7 +8,7 @@
 /** Wyciaga adres glownej powierzchni po ktorej rysuje */
 Renderer::Renderer()
 {  
-  gInfo("Constructor class: RENDERER");  
+  info("Constructor class: RENDERER");  
 
 
   pScreen = App::getMainSurface();

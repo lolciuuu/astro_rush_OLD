@@ -13,29 +13,22 @@
 /// @note zmienna statyczna globalna przechowuje logi zbierane podczas pracy aplikacji
 static string LOGI("");
 
-/** Metoda wyswietla w konsoli informacje.
- * Podana jako parametr informacja to log systemu.
- * @warning Dziala tylko w trybie DEBUG. 
- * @warning jezeli zdefiniowana jest flaga LINUX, wtedy naglowek informacji jest kolorowany
- *
- * @deprecated
-*/
-inline void gInfo( const string& t ) {
-
-#ifdef DEBUG
-    cout<<
-#ifdef LINUX
-        "[ \033[1;36mInfo\033[0m ] "
-#else
-        "[ Info ] "
-#endif
-        << t <<endl;
-#endif
-	// Dodanie do logow zapisywanych do pliku
-	LOGI += "[ Info ] ";
-	LOGI += t;
-	LOGI +='\n';
+//@TODO dopisac komentarz
+//@TODO zrobic na szablonie, wywalic info,
+//@TODO dodac argv - zmienna liczbe parametrow!!
+inline void info( const string& t ) {
+    cout<<"[ Info ] "<< t <<endl;
 }
+
+//@TODO dopisac komentarz
+//@TODO zrobic na szablonie, wywalic info,
+//@TODO dodac argv - zmienna liczbe parametrow!!
+inline void debug( const string& t ) {
+#ifdef DEBUG
+    cout<<"[ Debug ] "<< t <<endl;
+#endif
+}
+
 
 /** */
 inline bool isPlatform( short ID ) {
@@ -100,11 +93,11 @@ inline void gError ( const string& Text ) {
 
 /** */
 inline void gStartMethod( string name ) {
-	gInfo( name + "| start" );
+	info( name + "| start" );
 }
 
 inline void gEndMethod( string name ) {
-	gInfo( name + "| end" );
+	info( name + "| end" );
 }
 
 /** Metoda wyswietla w konsoli informacje.
@@ -146,23 +139,8 @@ inline string gLoadLanguages() {
 }
 
 
-/** Funkcja zapisuje zebrane logi do pliku ConsoleOut.log,
- *  w razie problemow z otwarciem pliku na konsole idzie komunikat
- */
-inline void gSaveLogToFile(){
-  /*
-  std::fstream log;
-  log.open("ConsoleOut.log", std::ios::out );
-  
-  if( log.is_open() ){
-      log<<LOGI;
-      log.close();
-  }
-  else gCritical("Can`t save log!");
-  */
-}
-
 /** Zamienia liczbe na string */
+//@TODO sprawdzanie czy podano liczbe?
 template <typename T>
 inline string toString( T number ) {
   std::ostringstream ss;
@@ -172,7 +150,7 @@ inline string toString( T number ) {
 
 /** Drukuje na ekranie info o SDL_Rect oraz jego nazwe podana jako parametr */
 inline void gPrintRect( const string& Name, Rect& rect ) {
-  gInfo( "Rect:\"" + Name +"\"\n"
+  info( "Rect:\"" + Name +"\"\n"
 	+ "\tX: " + toString<Sint16>(rect.x)
 	+ " | Y: " + toString<Sint16>(rect.y)
 	+ " | W: " + toString<Uint16>(rect.w)

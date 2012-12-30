@@ -30,7 +30,7 @@ public:
 		#ifndef IMMORTAL
 	  	  	  if( pLiveAmount <= 0.0 ) {
 	  	  		  isLive = false;
-	  	  		  gInfo("Player is dead");
+	  	  		  info("Player is dead");
 	  	  		  return( isLive );
 	  	  	  }
 		#else

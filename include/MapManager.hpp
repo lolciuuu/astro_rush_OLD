@@ -38,7 +38,7 @@ public:
 		}
     }
 
-    short checkColision(short Player_x, short Player_y,ColisionSide& cSide);
+    short checkColision(const short& Player_x,const short& Player_y,ColisionSide& cSide);
     
 private:
    static Map* loadMapFromFile(string fileName,short levelNo);

@@ -12,7 +12,7 @@ SOURCES = src/main.cpp src/App.cpp src/Property.cpp src/Resource.cpp \
 		  src/Highscore.cpp src/SpriteManager.cpp src/MapManager.cpp \
 		  src/Map.cpp src/LiveBar.cpp src/SoundManager.cpp src/Splash.cpp \
 		  src/RendererGL.cpp src/Logger.cpp src/EnemyManager.cpp \
-		  src/Enemy.cpp
+		  src/Enemy.cpp src/Background.cpp
 
 # extension compiled cpp file
 OBJECTS=$(SOURCES:.cpp=.o)

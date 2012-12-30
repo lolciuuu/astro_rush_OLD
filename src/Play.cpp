@@ -1,10 +1,5 @@
 #include "../include/Play.hpp"
 
-
-void Play::pressedShift() {
-	pPlayer.fall();
-}
-
 /**
  * 
  */
@@ -15,11 +10,19 @@ pCount( SpriteManager::getInstance()->getSprite("COUNTING") )
 {
 	logger.setClassName( "PLay" );
     logger.info("Constructor class: PLAY");
+
+    pBackground.init();
     pCount.centered();
 }
 
+
 Play::~Play() {
 	delete pEnemyManager;
+}
+
+
+void Play::pressedShift() {
+	pPlayer.fall();
 }
 
 /** zapisanie highscore */
@@ -34,7 +37,6 @@ void Play::pressedChar(char Char) {
 	if( !  LiveBar::isALive() ) {
 		pHighScore.pressedChar( Char );
 	}
-
 }
 
 void Play::pressedBackspace() {
@@ -42,8 +44,7 @@ void Play::pressedBackspace() {
 		pHighScore.pressedBackspace();
 }
 
-/** Aktualizacja gry
- */
+/** Aktualizacja gry */
 void Play::update(const float& dt ){
 
 	if( !LiveBar::isALive() ) return;
@@ -63,21 +64,21 @@ void Play::update(const float& dt ){
       pElapsedTime += dt;
       pCount.update(dt);
     }
+
   }
   else { /// Gracz biegnie
 
-    if( LiveBar::isALive() ) {
       pMap.update( dt );
       pLiveBar.update( dt );
-
       pEnemyManager->update( dt );
-   
+      pBackground.update( dt );
+
       ColisionSide cSide;
       //@TODO optymalizacja
-      /** Parametr cSide przekazuje informacje do playera z ktorej strony wystepuje kolizja z platforma */
-     short type = pMap.checkColision( pPlayer.getPosX(), pPlayer.getPosY(), cSide );
+     register short type = pMap.checkColision( pPlayer.getPosX(), pPlayer.getPosY(), cSide );
 
-     if( type != -1 ) {
+     // Sprawdzanie kolizji z bonusami, przeszkodami
+     if( type != -1 ) { // -1 oznacza pusty entity na mapie
 
     	  if( isBonus( type ) ) {
     	 	  pHighScore.colision( type );
@@ -89,8 +90,12 @@ void Play::update(const float& dt ){
     		  pLiveBar.colision( type );
     	  }
 
-      }// type != -1
+      }//END type != -1
 
+     /** Parametr cSide przekazuje informacje do playera z ktorej strony wystepuje kolizja z platforma */
+     pPlayer.update( dt, cSide );
+
+     // sprawdzanie kolizji z przeciwnikami
      if( pEnemyManager->isColidate( Rect( pPlayer.getPosX(), pPlayer.getPosY(), pPlayer.getSize_X(), pPlayer.getSize_Y() ) ) ) {
 
     	 if( pPlayer.isColisionWithEnemy() ) {
@@ -98,10 +103,6 @@ void Play::update(const float& dt ){
     		 pPlayer.disableEnemyDetect();
     	 }
      }
-
-      pPlayer.update( dt, cSide );
-    
-    }
   }
   
 }
@@ -112,6 +113,9 @@ void Play::draw(){
   if( LiveBar::isALive() ) {
   
       pRendererPtr->drawBackground( false );
+
+      // rysowanie przewijalnego tla na mapie
+      pBackground.draw();
     
       // MapManager rysuje mapy
       pMap.draw();
@@ -123,7 +127,7 @@ void Play::draw(){
       pPlayer.draw();
       
       // Klasa LiveBar rysuje pasek zycie u gory
-      pLiveBar.draw();    
+      pLiveBar.draw();
 
       // Rysowanie odliczania
       if( !isCanStop() ) {

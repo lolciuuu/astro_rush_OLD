@@ -47,7 +47,6 @@ int Property::addComand( lua_State* L ) {
 
 }
 
-
 /** Metoda jest uruchamiania z poziomu skryptu, dodaje nowy settings- para string, double
  * @return 0
  */
@@ -68,7 +67,6 @@ int Property::addSetting( lua_State* L ) {
     return 0;
 
 }
-
 
 /** Wczytywanie komuniktaow z pliku dla konkretnego jezyku
  *  Domyslnie wczytywany jest jezyk angielski
@@ -98,14 +96,12 @@ void Property::readProperty() {
     }
 
     lua_close(L);
-
-
 }
 
 
-/**
- * 
- */
+/** Metoda wykonuje skrypt settings.xml, do ktorego jednoczesnie przekazujem wymiary ekranu.
+ * W skrypcie zarejestrowane sa metody: cxx_addProperty,cxx_addSetting za pomoca ktorych mozna ustawic w aplikacji
+ * wartosc liczbowa i stringa. Takie dane dostepne sa potem w calej aplikacji za pomoca funkcji statycznych  */
 void Property::readSettings() {
 
     lua_State* L = lua_open();
@@ -128,19 +124,16 @@ void Property::readSettings() {
     }
 
     lua_close(L);
-
 }
 
 
 
 /** Metoda sprawdza czy pod podanym kluczem dostepny jest komunikat  
- *  @return true - jesli instieje dana property
+ *  @return true - jesli istnieje dana klucz
  */
 bool Property::contains( const string& key) {
-  
     bool isFound = property.find( key ) != property.end();
     return ( isFound ? true : false );
-	
 }
 
 
@@ -148,16 +141,15 @@ bool Property::contains( const string& key) {
  *  @return true - jesli instieje dany settings
  */
 bool  Property:: containsSetings( const string& key) {
-  
     bool isFound = pSettings.find( key ) != pSettings.end();
     return ( isFound ? true : false );
-	
 }
 
+
+/** */
 void Property::resetLang(string Languages){
     pLanguages = Languages;
     property.clear();
     readProperty();
-
 }
 

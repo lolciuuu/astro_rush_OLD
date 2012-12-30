@@ -177,7 +177,7 @@ int Splash::initThread( void* ) {
     SDL_Delay( 10 );
     pInitIsDone = true;
 
-    gInfo("Loading resource is finish");
+    info("Loading resource is finish");
 
     return( 0 );
 }

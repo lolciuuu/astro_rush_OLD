@@ -22,58 +22,38 @@ void Resource::fontError() {
 }
 
 
-/**
- *
- */
+/** */
 void Resource::load() {
 
     atexit( clearResource );
 
-    loadImages();
+	loadImage( "atlas.png", "ATLAS" );
+	loadImage( "background.jpg", "BACKGROUND" );
+	loadImage( "menu_background.jpg", "MENU_BACKGROUND" );
+	loadImage( "level_background.png", "LEVEL_BACKGROUND" );
+
     loadFonts();
 
     // wczytanie map
     MapManager::load();
 }
 
-/** Wczytywane w osobnym watku podczas startu aplikacji */
-void Resource::loadImages() {
-   
-  /** TODO W razie nowych pozycji, przerobic na osobna metode */
-  
-    // Atlas spritow
-    SDL_Surface* atlas = IMG_Load("data/pic/atlas.png");
-    if ( atlas == NULL ) {
-        gCritical("Atlas file not found");
+/**@TODO komentarz */
+void Resource::loadImage( const string& name, const string& resourceName ) {
+
+	info("Load image:" + name );
+
+    SDL_Surface* tmpSurf = IMG_Load( string("data/pic/"+name).c_str() );
+    if ( tmpSurf == NULL ) {
+        gCritical( name + " file not found");
         throw("Resource::load");
     }
-    pSurfaces.insert( std::pair<string,SDL_Surface*>( "ATLAS",atlas ) );
-    
-    
-    // Tlo w grze
-    SDL_Surface* background = IMG_Load("data/pic/background.jpg");
-    if( background == NULL ) {
-       gCritical("Background file not found");
-       throw("Resource::load");
-    }
-      else {
-    //  SDL_Rect dest = SDL_Rect({0,0,App::getScreenWidth(),App::getScreenHeight()});
-   //   SDL_SoftStretch(background, NULL, background, &dest);
-      pSurfaces.insert( std::pair<string,SDL_Surface*>( "BACKGROUND_MAP",background ) );
-    }   
-    
-    //
-    SDL_Surface* menuTitle = IMG_Load("data/pic/menu_background.jpg");
-    if( background == NULL ) {
-       gCritical("Menu_title file not found");
-       throw("Resource::load");
-    }
-  
-    pSurfaces.insert( std::pair<string,SDL_Surface*>( "MENU_BACKGROUND",menuTitle ) );
-    
- 
+    pSurfaces.insert( std::pair<string,SDL_Surface*>( resourceName,tmpSurf ) );
+
 }
 
+
+//@TODO wyalic nie uzywana metode
 void Resource::loadFonts() {
 
     //bold small
@@ -149,7 +129,6 @@ SDL_Surface* Resource::getSurf( string Name ){
     gError(Name + ":Not found surfaces" );
     throw(string("Resource::getSurf")); 
   }
-  
-}
 
+}
 

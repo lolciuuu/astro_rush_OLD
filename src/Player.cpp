@@ -100,7 +100,7 @@ void Player::update(const float& dt, ColisionSide& side ){
 
   /** Polozenie w poziomie */
   //@TODO powiazac ilosc zycia z szybkoscia
-  //@TODO usunac liczbe magiczna
+  //@TODO usunac liczbe magiczna//@TODO przeniesc do przesuwania mapy
   if( pCurrentSprite != ( &pStandSprite ) ) {
      if( pX < ( LiveBar::getLiveAmount()*pMaxPlayerOnScreenX ) ) {
     	 pX += dt * 100;

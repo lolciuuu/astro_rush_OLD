@@ -2,7 +2,8 @@
 #define RESOURCE_HPP
 #include "Headers.hpp"
 
-/** @TODO opisac klase */
+/** Klasa przechowujaca wczytany zasoby. Zasoby (czcionki, obrazy, dzwieki) dostepne
+ * sa w calej aplikacji za pomoca metod statycznych  */
 class Resource {
 
 public:
@@ -13,7 +14,7 @@ public:
     static SDL_Surface* getSurf( string name );
 
 private:
-    Resource() { /* constructor*/ }
+    Resource() { /*...*/ }
 
     static void clearResource();
 
@@ -21,7 +22,7 @@ private:
 
     static void loadFonts();
 	
-    static void loadImages();
+    static void loadImage( const string& name,const string& resourceName );
 
     static bool containsFont( const string& key) {
         bool isFound = pFonts.find( key ) != pFonts.end();
@@ -37,8 +38,6 @@ private:
     static map< string, SDL_Surface* > pSurfaces;
     static map< string, TTF_Font* > pFonts;
 
-
 };
-
 
 #endif

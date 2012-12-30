@@ -9,8 +9,8 @@ TIME_FACTOR = 2
 
 --		NAME            		 width   	height  	X     		 Y    	  level  	frame time      count     loop
 cxx_addSprite( "NEW_GAME",        215,  	 220,   	1220,  	  	10,     	1,         1000 ,    	  1,     false );
-cxx_addSprite( "PLAYER_RUN",      50,   	 98,    	1,     		122,    	1,         40 ,    	      10,    true  );
-cxx_addSprite( "PLAYER_STAND",    50,   	 98,     	551,   		122,    	1,         100 ,    	  1,     false );
+cxx_addSprite( "PLAYER_RUN",      50,   	 98,    	1,     		120,    	1,         40 ,    	      10,    true  );
+cxx_addSprite( "PLAYER_STAND",    50,   	 98,     	551,   		120,    	1,         100 ,    	  1,     false );
 cxx_addSprite( "PLAYER_FLY",      52,   	 100,   	599,    	122,    	1,         60 ,     	  1,     true  );
 cxx_addSprite( "COUNTING",        50,   	 58,    	0,      	0,      	1,         290,    	      4,     false );
 cxx_addSprite( "LIVE_BAR",        100,  	 62,   	    840,    	39,     	1,         620 ,    	  1,     false );

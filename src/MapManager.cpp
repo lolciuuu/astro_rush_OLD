@@ -66,7 +66,7 @@ Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
 
     if(mapFile.is_open()) {
 
-    	gInfo("Load map from file | start");
+    	info("Load map from file | start");
 
         // pobranie wymiarow mapy
         mapFile >> row;
@@ -99,7 +99,7 @@ Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
         result = new Map( map,(int)Property::getSetting(settingsName),row,column);
 
         mapFile.close();
-    	gInfo("Load map from file | end");
+    	info("Load map from file | end");
         return( result );
 	
     }
@@ -121,7 +121,7 @@ void MapManager::reset() {
 }
 
 /** */ 
-short MapManager::checkColision(short Player_x, short Player_y, ColisionSide& cSide ) {
+short MapManager::checkColision( const short& Player_x,const short& Player_y, ColisionSide& cSide ) {
    return( pMapMain->checkColision( Player_x, Player_y, cSide ) );
 }
 

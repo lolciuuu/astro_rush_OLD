@@ -8,6 +8,7 @@
 #include "SpriteManager.hpp"
 #include "EnemyManager.hpp"
 #include "StandardReferences.hpp"
+#include "Background.hpp"
 
 /** Obsluga taki jednostek jak: mapa, gracz, pasek zycia, highscore...stan gry*/
 class Play: StandardReferences {
@@ -44,13 +45,13 @@ private:
     Highscore pHighScore;
     LiveBar pLiveBar;
     float PLAYER_SLEEP_TIME;
-     ushort PLAYER_SIZE;
+    ushort PLAYER_SIZE;
 
     EnemyManager* pEnemyManager;
     
-
     Sprite pCount;
-    
+    Background pBackground;
+
 };
 
 #endif // PLAY_HPP

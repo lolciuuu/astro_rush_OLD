@@ -25,7 +25,7 @@ TILES_VERTICAL=18;
 TILES_AMOUNT_VERTICAL=15; -- ile jest wierszy na mapie
 TILES_SIZE=SCREEN_H/TILES_VERTICAL;
 
-cxx_addSetting("PLAYER_OFFSET_X", 80 );
+cxx_addSetting("PLAYER_OFFSET_X", 180 );
 cxx_addSetting("PLAYER_OFFSET_Y", (SCREEN_H/TILES_VERTICAL)*3 );
 cxx_addSetting("PLAYER_SLEEP_TIME", 1  );
 cxx_addSetting("PLAYER_SPEED", 200 );

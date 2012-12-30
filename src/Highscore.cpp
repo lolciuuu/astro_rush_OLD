@@ -67,9 +67,7 @@ void Highscore::show(){
 
 /** */
 void Highscore::colision( short type ) {
-  #ifdef DEBUG  
-    gInfo("Highscore colision");
-  #endif
+    debug("Highscore colision");
     LiveBar::increaseLive();
 }
   

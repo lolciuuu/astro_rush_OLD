@@ -28,35 +28,31 @@ int main( int argc, char* argv[] ) {
         app->init();	
         app->endSplash();
 
-        gInfo( Property::get("END_STARTING") );
+        info( Property::get("END_STARTING") );
         app->run();//Uruchomienie glownej petli programu
 
     }
     catch( char const* Error ){
        delete app;
        gCritical( Error );
-       gSaveLogToFile();
        gCritical("Aplication terminated");
        return( EXIT_FAILURE );
     }
     catch( std::exception& e ) {
     	 delete app;
     	 gCritical( e.what() );
-    	 gSaveLogToFile();
     	 gCritical("Aplication terminated");
     	 return( EXIT_FAILURE );
     }
     catch ( ... ) {
         delete app;
         gCritical("Unexcepted error");
-        gSaveLogToFile();
         gCritical("Aplication terminated");
         return( EXIT_FAILURE );
     }
 
     delete app;
-    gInfo(  Property::get("GAME_END_INFO") );
-    gSaveLogToFile();
+    info(  Property::get("GAME_END_INFO") );
     return( EXIT_SUCCESS );
 
 }

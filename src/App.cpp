@@ -283,7 +283,7 @@ void App::processEvent() {
         }
 	#endif
         else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_ESCAPE ) {
-            gInfo("ESC pressed");
+            info("ESC pressed");
             pGame->pressedEsc();
         }
 	    else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_SPACE ) {

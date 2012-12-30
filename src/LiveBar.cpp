@@ -70,6 +70,8 @@ void LiveBar::colision( short type ) {
 
 /** */
 bool LiveBar::useBonus() {
+	if( isImmortal == true ) return false;
+
 	  if( pBonusAmount > 0 ){
 		  --pBonusAmount;
 		  isImmortal = true;

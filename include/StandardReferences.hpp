@@ -9,7 +9,6 @@
 
 class StandardReferences {
 public:  
-
   StandardReferences() :
       	  pRendererPtr( Renderer::getInstance() ),
       	  pWriterPtr( Writer::getInstance() ),

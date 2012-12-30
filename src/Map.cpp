@@ -30,7 +30,7 @@ Map::Map(short **M, ushort EntitySize, uint R, uint C) :
 }
 
 /** Sciaga ze stosu ostatni element na ktorym wykryto kolizje */
-short Map::checkColision(short Player_x, short Player_y, ColisionSide& cSide) {
+short Map::checkColision(const short& Player_x, const short& Player_y,ColisionSide& cSide) {
 
 	pPlayer_x = Player_x;
 	pPlayer_y = Player_y;

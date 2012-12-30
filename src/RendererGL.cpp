@@ -5,7 +5,7 @@
 /** */
 RendererGL::RendererGL():
 pScreen(NULL), pAtlas( Resource::getSurf("ATLAS") ),
-pBackground( Resource::getSurf("BACKGROUND_MAP") ),
+pBackground( Resource::getSurf("BACKGROUND") ),
 pMenuBackground( Resource::getSurf("MENU_BACKGROUND")  ), isInit( false )
 {
 	pBackground_GL = 0;
@@ -95,6 +95,53 @@ else
 #ifdef LIGHT_GL
 	  glDisable(GL_LIGHTING);
 #endif
+}
+
+void RendererGL::draw( GLuint texture, Rect& Dest ) {
+
+	  glBindTexture(GL_TEXTURE_2D, texture );
+
+	  glBegin(GL_QUADS);
+		     {
+		         glTexCoord2f(0,0);//1
+		         glVertex2f( Dest.x, Dest.y );
+
+		         glTexCoord2f( 1, 0 );//2
+		         glVertex2f( Dest.x + Dest.w, Dest.y );
+
+	             glTexCoord2f(1, 1);//3
+		         glVertex2f( Dest.x + Dest.w , Dest.y + Dest.h );
+
+		         glTexCoord2f(0,1);//4
+		         glVertex2f( Dest.x, Dest.y + Dest.h);
+		     }
+	   glEnd();
+}
+
+GLuint RendererGL::getSurfaceInGLFormat(SDL_Surface* surface) {
+	return get_gl(surface);
+}
+
+void RendererGL::draw(GLuint texture, const float& x, const float& y,
+		const float& w, const float& h) {
+
+	  glBindTexture(GL_TEXTURE_2D, texture );
+
+	  glBegin(GL_QUADS);
+		     {
+		         glTexCoord2f(0,0);//1
+		         glVertex2f( x, y );
+
+		         glTexCoord2f( 1, 0 );//2
+		         glVertex2f( x + w, y );
+
+	             glTexCoord2f(1, 1);//3
+		         glVertex2f( x + w , y + h );
+
+		         glTexCoord2f(0,1);//4
+		         glVertex2f( x, y + h);
+		     }
+	   glEnd();
 }
 
 /** */
@@ -223,23 +270,7 @@ void RendererGL::draw( Rect& Src, Rect& Dest ){
 
 /** */
 void RendererGL::draw( SDL_Surface* surf, Rect& Dest ) {
-	  glBindTexture(GL_TEXTURE_2D, get_gl(surf) );
-
-		     glBegin(GL_QUADS);
-		     {
-		         glTexCoord2f(0,0);//1
-		         glVertex2f( Dest.x, Dest.y );
-
-		         glTexCoord2f( 1, 0 );//2
-		         glVertex2f( Dest.x + Dest.w, Dest.y );
-
-	             glTexCoord2f(1, 1);//3
-		         glVertex2f( Dest.x + Dest.w , Dest.y + Dest.h );
-
-		         glTexCoord2f(0,1);//4
-		         glVertex2f( Dest.x, Dest.y + Dest.h);
-		     }
-		     glEnd();
+	draw( get_gl(surf), Dest );
 }
 
 /** */
