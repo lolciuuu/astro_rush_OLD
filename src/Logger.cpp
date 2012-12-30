@@ -1,53 +1,43 @@
 #include "../include/Logger.hpp"
 
-string Logger::LOGS("Astro Rush game log\n");
-
+/** Podana nazwa klasy jest doklejana do logow */
 Logger::Logger( string className ): className( className )
-{
+{ }
 
-}
-
-Logger::Logger() {
-
-}
-
-void Logger::methodStart( string methodName ) {
+/** wypisuje informacje o rozpoaczeciu dzialania metody */
+void Logger::methodStart(  const string& methodName ) {
 	info( className + "::" + methodName + " | start"  );
 }
 
-void Logger::methodEnd( string methodName ) {
+/** wypisuje informacje o tym ze metoda sie zakonczyla */
+void Logger::methodEnd( const string& methodName ) {
 	info( className + "::" + methodName + " | end"  );
 }
 
-void Logger::info( string Str ) {
-#ifdef DEBUG
+/** wypisuje informacje */
+void Logger::info( const string& Str ) {
     cout<< "[ Info ] " << Str  << " | class::" << className << "| " << endl;
-#endif
-	LOGS += "[ Info ] " + Str + "\n";
 }
 
-void Logger::warring( string Str ) {
-#ifdef DEBUG
+/** wypisuje ostrzezenie */
+void Logger::warring( const string& Str ) {
     cout<< "[ Warning ] " << Str  << " | class::" << className << "| "<<endl;
-#endif
-	LOGS += "[ Warning ] " + Str + "\n";
 }
 
-void Logger::error( string Str ) {
-#ifdef DEBUG
+/** informacja o bledzie */
+void Logger::error( const string& Str ) {
     cerr<< "[ Error ] " << Str  << " | class::" << className << "| " <<endl;
-#endif
-	LOGS += "[ Error ] " + Str + "\n";
 }
 
-void Logger::critical( string Str ) {
-#ifdef DEBUG
+/** informacja o bledzie krytycznym */
+void Logger::critical( const string& Str ) {
     cerr<< "[ Critical ] " << Str  << " | class::" << className << "| "<<endl;
+}
+
+/** Wypisuje tylko kiedy ustawiona flaga debug */
+void Logger::debug(const string& Str) {
+#ifdef DEBUG
+	 cout<< "[ Debug ] " << Str  << " | class::" << className << "| "<<endl;
 #endif
-	LOGS += "[ Critical ] " + Str + "\n";
 }
 
-/** @TODO dopisac zapisywanie logow w osobnym watkow i wywolywane przez timer */
-void Logger::initTimer() {
-
-}

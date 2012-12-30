@@ -99,7 +99,7 @@ bool Menu::update (const float& dt ) {
         	break;
     	}
     	default: {
-    		gWarring ( "Unknown value of MenuState [Method: Menu::update() ]" );
+    		warring ( "Unknown value of MenuState [Method: Menu::update() ]" );
     		break;
     	}
     }
@@ -120,7 +120,7 @@ void Menu::draw() {
     		break;
     	}
     	default: {
-    		gWarring ( "Unknown value of MenuState [Method: Menu::draw()]" );
+    		warring ( "Unknown value of MenuState [Method: Menu::draw()]" );
     		break;
     	}
     }

@@ -40,6 +40,7 @@ public:
 			return true;
 		return false;
 	}
+
 };
 
 #endif

@@ -15,8 +15,8 @@ map< string,TTF_Font* >  Resource::pFonts;
  */
 void Resource::fontError() {
 
-    gCritical("Brak czcionki");
-    gCritical( TTF_GetError() );
+    critical("Brak czcionki");
+    critical( TTF_GetError() );
     throw("Resource:load");
 
 }
@@ -45,7 +45,7 @@ void Resource::loadImage( const string& name, const string& resourceName ) {
 
     SDL_Surface* tmpSurf = IMG_Load( string("data/pic/"+name).c_str() );
     if ( tmpSurf == NULL ) {
-        gCritical( name + " file not found");
+        critical( name + " file not found");
         throw("Resource::load");
     }
     pSurfaces.insert( std::pair<string,SDL_Surface*>( resourceName,tmpSurf ) );
@@ -110,7 +110,7 @@ TTF_Font* Resource::getFont(string name) {
     }
     else
     {
-        gError(name + ":Not found font" );
+        error(name + ":Not found font" );
         throw("Resource::getFont");
     }
 
@@ -126,7 +126,7 @@ SDL_Surface* Resource::getSurf( string Name ){
     return pSurfaces.find( Name )->second;
   }
   else{
-    gError(Name + ":Not found surfaces" );
+    error(Name + ":Not found surfaces" );
     throw(string("Resource::getSurf")); 
   }
 

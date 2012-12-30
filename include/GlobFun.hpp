@@ -1,54 +1,41 @@
-/** Plik zawiera funkcje globalne inline, ktore pelnia role pomocnicze,
- *  i sa one dostepne w calym systemie.
- */
+/** Plik zawiera funkcje globalne inline, ktore pelnia role pomocnicze, i sa one dostepne w calym systemie. */
 
 #ifndef GLOBFUN_HPP
 #define GLOBFUN_HPP
 #include "Headers.hpp"
 
 
-//#define LINUX
-
-
-/// @note zmienna statyczna globalna przechowuje logi zbierane podczas pracy aplikacji
-static string LOGI("");
-
-//@TODO dopisac komentarz
-//@TODO zrobic na szablonie, wywalic info,
-//@TODO dodac argv - zmienna liczbe parametrow!!
+/** wypisuje komunikat w konsoli */
 inline void info( const string& t ) {
     cout<<"[ Info ] "<< t <<endl;
 }
 
-//@TODO dopisac komentarz
-//@TODO zrobic na szablonie, wywalic info,
-//@TODO dodac argv - zmienna liczbe parametrow!!
+/** Wyswietla komunikat wtedy kiedy aplikacja skompilowana jest w trybie debug */
 inline void debug( const string& t ) {
 #ifdef DEBUG
     cout<<"[ Debug ] "<< t <<endl;
 #endif
 }
 
-
-/** */
+/** Zwraca informacje o tym czy kafelek jest platforma */
 inline bool isPlatform( short ID ) {
 	if( ID == 39 ) return true;
 	return false;
 }
 
-/** */
+/** Czy kafelek jest bonusem dodajacym zycia? */
 inline bool isBonus( const short& ID ) {
 	if( ID == 38 || ID ==  37 ) return true;
 	return false;
 }
 
-/** */
+/** Czy kafelek jest bonusem ktory gracz moze zebrac? */
 inline bool isAdditionalBonus( const short& ID ) {
 	if( ID == 41 ) return true;
 	return false;
 }
 
-/** */
+/** okresla czy kafalek to wrog */
 inline bool isEnemy( const short& ID ) {
 	if( ID == 40 ) return true;
 	return false;
@@ -57,72 +44,40 @@ inline bool isEnemy( const short& ID ) {
 /** Metoda wyswietla w konsoli informacje.
  * Podana jako parametr informacja to ostrzezenie.
  */
-inline void gWarring ( const string& Text ) {
-    cerr<<
-#ifdef LINUX
-        "[ \033[1;33mWarning\033[0m ] "
-#else
-        "[ Warning ] "
-#endif
-        << Text <<endl;
-		
-	// Dodanie do logow zapisywanych do pliku
-	LOGI += "[ Warning ] ";
-	LOGI += Text;
-	LOGI +='\n';
+inline void warring ( const string& Text ) {
+    cerr<<"[ Warning ] "<< Text <<endl;
 }
 
 
 /** Metoda wyswietla w konsoli informacje.
 * Podana jako parametr informacja to informacja o bledzie.
 */
-inline void gError ( const string& Text ) {
-    cerr<<
-#ifdef LINUX
-        "[ \033[1;33mError\033[0m ] "
-#else
-        "[ Error ] "
-#endif
-        << Text <<endl;
-	
-	// Dodanie do logow zapisywanych do pliku
-	LOGI += "[ Error ] ";
-	LOGI += Text;
-	LOGI +='\n';
+inline void error ( const string& Text ) {
+    cerr<<"[ Error ] "<< Text <<endl;
 }
 
 /** */
-inline void gStartMethod( string name ) {
+inline void startMethod( const string& name ) {
 	info( name + "| start" );
 }
 
-inline void gEndMethod( string name ) {
+/** */
+inline void endMethod( const string& name ) {
 	info( name + "| end" );
 }
 
 /** Metoda wyswietla w konsoli informacje.
 * Podana jako parametr informacja to informacja o bledzie krytycznym.
 */
-inline void gCritical ( const string& Text ) {
-    cerr<<
-#ifdef LINUX
-        "[ \033[1;33mCritical\033[0m ] "
-#else
-        "[ Critical ] "
-#endif
-        << Text <<endl;
-	
-	// Dodanie do logow zapisywanych do pliku
-	LOGI += "[ Critical ] ";
-	LOGI += Text;
-	LOGI +='\n';
+inline void critical ( const string& Text ) {
+    cerr<<"[ Critical ] "<< Text <<endl;
 }
 
 /** Metoda odczytuje kod jezyka jaki ma byc ustawiony w grze i zwraca go jako
  *  string. W razie problemow ze znalezieniem pliku zwraca informacje ze jezykiem
  *  w grze jest angielski.
  */
-inline string gLoadLanguages() {
+inline string loadLanguages() {
 
     fstream langFile ( "data/lang" , std::ios::in );
 
@@ -135,12 +90,10 @@ inline string gLoadLanguages() {
 
     }
     else return( "ANG" );
-
 }
 
 
 /** Zamienia liczbe na string */
-//@TODO sprawdzanie czy podano liczbe?
 template <typename T>
 inline string toString( T number ) {
   std::ostringstream ss;
@@ -149,7 +102,7 @@ inline string toString( T number ) {
 }
 
 /** Drukuje na ekranie info o SDL_Rect oraz jego nazwe podana jako parametr */
-inline void gPrintRect( const string& Name, Rect& rect ) {
+inline void printRect( const string& Name, Rect& rect ) {
   info( "Rect:\"" + Name +"\"\n"
 	+ "\tX: " + toString<Sint16>(rect.x)
 	+ " | Y: " + toString<Sint16>(rect.y)

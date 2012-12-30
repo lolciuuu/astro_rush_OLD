@@ -39,7 +39,7 @@ void RendererGL::create_gl(SDL_Surface * surf, GLuint * tex )
                     format = GL_BGR;
     }
     else {
-        gCritical("Image is not truecolor");
+        critical("Image is not truecolor");
     }
 
     glGenTextures( 1, tex );
@@ -164,7 +164,7 @@ GLuint RendererGL::get_gl(SDL_Surface * surf ) {
                     format = GL_BGR;
     }
     else {
-        gCritical("Image is not truecolor");
+        critical("Image is not truecolor");
     }
 
     glGenTextures( 1, &tex );

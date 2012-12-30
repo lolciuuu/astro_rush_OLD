@@ -84,7 +84,7 @@ void Splash::startSplash( ushort W, ushort H, SDL_Surface* Screen ) {
                         format = GL_BGR;
         }
         else {
-            gCritical("Image is not truecolor");
+            critical("Image is not truecolor");
         }
 
         glGenTextures( 1, &pSplashGL );
@@ -110,11 +110,10 @@ void Splash::endSplash() {
 }
 
 
-/**
- */
+/** */
 void Splash::drawSplash() {
 
-	pRectLoad.w = 198 * ( pCurrentLoop / static_cast<float>(100 * SPLASH_TIME)) ;
+	pRectLoad.w = 208 * ( pCurrentLoop / static_cast<float>(100 * SPLASH_TIME)) ;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -163,14 +162,12 @@ void Splash::drawSplash() {
 
 }
 
-
-
 /** Metoda jest wykonywana w osobnym watku, i wczytuje wszystkie zasoby
  *  Podczas wczytywania zasobow w glownym watku jest rysowany splash
  */
 int Splash::initThread( void* ) {
 
-    Property::init( gLoadLanguages() );
+    Property::init( loadLanguages() );
     Resource::load();
     SpriteManager::loadConfig();
     

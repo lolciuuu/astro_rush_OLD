@@ -26,7 +26,7 @@ public:
             return( property.find( key )->second );
         }
         else {
-            gError(key + "-Not found property" );
+            error(key + "-Not found property" );
             return( "xxxxxxxxx" );
         }
     }
@@ -38,7 +38,7 @@ public:
             return( pSettings.find( key )->second );
         }
         else {
-            gError(key + "-Not found property" );
+            error(key + "-Not found property" );
             return( 0 );
         }
     }

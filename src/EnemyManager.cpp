@@ -13,7 +13,7 @@ EnemyManager* EnemyManager::getInstance() {
 }
 
 EnemyManager::EnemyManager():pLastEnemy( 0 ),pCurrentX( 0 ), pOffsetX( 0.0f ),
-pTilesSize( 0.0f ), pHorizontalTilesAmount( 0 )
+pTilesSize( 0.0f ), pHorizontalTilesAmount( 0 ), logger("EnemyManager")
 {
 	logger.setClassName("EnemyManager");
 

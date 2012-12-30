@@ -19,7 +19,7 @@ LiveBar::LiveBar() :pDistStr( Property::get("HIGH_GAME_DIST") ), pBonusAmount( 0
 void LiveBar::draw() {
 
 	pRendererPtr->draw( "LIVE_BAR_BACK", pScreenWidth*0.053, pScreenHeight*0.043, -1, -1 );
-	pRendererPtr->draw( "LIVE_BAR_FILL", pScreenWidth*0.053, pScreenHeight*0.044, 200*pLiveAmount, -1 );
+	pRendererPtr->draw( "LIVE_BAR_FILL", pScreenWidth*0.053, pScreenHeight*0.045, 200*pLiveAmount, -1 );
 	pRendererPtr->draw( "LIVE_BAR",      pScreenWidth*0.01,  pScreenHeight*0.02, -1, -1 );
 
 	// Wypisywanie informacji i przebytej drodze

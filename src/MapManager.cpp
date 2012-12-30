@@ -104,7 +104,7 @@ Map* MapManager::loadMapFromFile(string fileName, short levelNo) {
 	
     }
     else {
-      gCritical("Can`t open file: " + fileName );
+      critical("Can`t open file: " + fileName );
       throw("MapManager::loadMapFromFile");
     }
 }

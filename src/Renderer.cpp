@@ -14,7 +14,7 @@ Renderer::Renderer()
   pScreen = App::getMainSurface();
 
   if( pScreen == NULL ){
-    gError("NULL pointer");
+    error("NULL pointer");
     throw("Renderer::Renderer()");
   }  
   

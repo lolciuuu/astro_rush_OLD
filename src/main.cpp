@@ -6,14 +6,16 @@
 /** AstroRush 2D game */
 int main( int argc, char* argv[] ) {
 
+
+
   #ifdef DEBUG
-    gWarring("Starting in debug mode");
+    warring("Starting in debug mode");
   #endif
 
     App* app = new App();
 
     try {
-      
+
 	app->startSplash();
 	
 	// Implementacja timera animujacego splash
@@ -23,7 +25,7 @@ int main( int argc, char* argv[] ) {
 	}
 	
 	// Zabezpieczenie w razie gdyby splash skonczyl sie wczesniej niz wczytywanie zasobow
-	while( !app->isInitDone() ) SDL_Delay(10);
+	while( !app->isInitDone() ) SDL_Delay( 5 );
 	  
         app->init();	
         app->endSplash();
@@ -34,20 +36,20 @@ int main( int argc, char* argv[] ) {
     }
     catch( char const* Error ){
        delete app;
-       gCritical( Error );
-       gCritical("Aplication terminated");
+       critical( Error );
+       critical("Aplication terminated");
        return( EXIT_FAILURE );
     }
     catch( std::exception& e ) {
     	 delete app;
-    	 gCritical( e.what() );
-    	 gCritical("Aplication terminated");
+    	 critical( e.what() );
+    	 critical("Aplication terminated");
     	 return( EXIT_FAILURE );
     }
     catch ( ... ) {
         delete app;
-        gCritical("Unexcepted error");
-        gCritical("Aplication terminated");
+        critical("Unexcepted error");
+        critical("Aplication terminated");
         return( EXIT_FAILURE );
     }
 

@@ -62,7 +62,7 @@ App::App(): logger("App"), pIsDone( false ), pEvent(), pIcon( NULL )
     }
     else if ( pScreen_w < MIN_SCREEN_WIDTH || pScreen_h < MIN_SCREEN_HEIGHT ) {
         logger.critical("Screen resoulution is too small");
-        throw("App::App()");
+    	throw std::runtime_error("App::App()");
     }
 
 	// Inicjowanie grafiki
@@ -278,7 +278,7 @@ void App::processEvent() {
 		#ifdef DEBUG
         /** @TODO Po nacisnieciu F1 wyjscie z aplikacji! */
         else if (pEvent.type == SDL_KEYDOWN && pEvent.key.keysym.sym == SDLK_F1 ) {
-            gError("Pressed F1 key. App is terminated.");
+            error("Pressed F1 key. App is terminated.");
             throw("App::processEvent");
         }
 	#endif

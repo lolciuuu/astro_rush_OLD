@@ -28,11 +28,11 @@ public:
 	  return( pMap_rects[ID] );
 	}
 	else {
-	    gCritical("Not found map ID: " + toString<ushort>(ID) );
+	    critical("Not found map ID: " + toString<ushort>(ID) );
 		#ifndef DEBUG
 	    	throw("MapManager::getRectByID");
 		#else // przypadek kiedy uztkownik wpisze glupoty
-	    	gCritical( "MapManager::getRectByID" );
+	    	critical( "MapManager::getRectByID" );
 	    	return( Rect({0,0,0,0}) );
 		#endif
 		}

@@ -52,7 +52,7 @@ int SpriteManager::addSprite( lua_State* L ) {
 
     }
     else {
-        gCritical("Lua:addSprite wrong parameters number");
+        critical("Lua:addSprite wrong parameters number");
         throw("SpriteManager::addSprite");
     }
 
@@ -76,7 +76,7 @@ void SpriteManager::loadConfig() {
 
     //Wolanie skryptu
     if ( luaL_dofile( L, "data/sprite_config.lua" ) != 0 ) {
-        gCritical(lua_tostring( L, -1 ));
+        critical(lua_tostring( L, -1 ));
         throw("SpriteManager::loadConfig");
     }
 
@@ -117,7 +117,7 @@ Sprite SpriteManager::getSprite( string Name ){
   }
   else{
 	 cout<<pSprites.size();
-    gCritical("Not found sprite:" + Name);
+    critical("Not found sprite:" + Name);
     throw("SpriteManager::getSprite");
    }  
 }

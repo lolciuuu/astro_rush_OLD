@@ -39,7 +39,7 @@ int Property::addComand( lua_State* L ) {
 
     }
     else {
-        gCritical("Lua:addComand wrong parameters number");
+        critical("Lua:addComand wrong parameters number");
         throw("Property::addComand");
     }
 
@@ -60,7 +60,7 @@ int Property::addSetting( lua_State* L ) {
 
     }
     else {
-        gCritical("Lua:addSetting wrong parameters number");
+        critical("Lua:addSetting wrong parameters number");
         throw("Property::addSetting");
     }
 
@@ -91,7 +91,7 @@ void Property::readProperty() {
 
     //Wolanie skryptu
     if ( luaL_dofile( L, fileName.c_str() ) != 0 ) {
-        gCritical(lua_tostring( L, -1 ));
+        critical(lua_tostring( L, -1 ));
         throw("Property::init");
     }
 
@@ -119,7 +119,7 @@ void Property::readSettings() {
 
     //Wolanie skryptu
     if ( luaL_dofile( L, "data/settings.lua" ) != 0 ) {
-        gCritical(lua_tostring( L, -1 ));
+        critical(lua_tostring( L, -1 ));
         throw("Property::init");
     }
 
